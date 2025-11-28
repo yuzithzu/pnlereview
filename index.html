@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PNLE PRO | ENTERPRISE LICENSURE SYSTEM</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet"
+    />
 
     <style>
         /* ==================================================================================
@@ -19,7 +22,7 @@
             --bg-body: #09090b;
             --bg-card: #18181b;
             --bg-input: #27272a;
-            
+
             --border-color: #3f3f46;
             --border-hover: #52525b;
 
@@ -28,7 +31,7 @@
             --text-dim: #71717a;
 
             /* Brand Colors */
-            --primary: #06b6d4;      /* Cyan-500 */
+            --primary: #06b6d4; /* Cyan-500 */
             --primary-hover: #0891b2; /* Cyan-600 */
             --primary-dim: rgba(6, 182, 212, 0.15);
 
@@ -39,7 +42,7 @@
             --warning-bg: rgba(245, 158, 11, 0.1);
             --error: #ef4444;
             --error-bg: rgba(239, 68, 68, 0.15);
-            
+
             /* Dimensions */
             --radius-sm: 6px;
             --radius-md: 12px;
@@ -47,8 +50,11 @@
             --container-width: 1280px;
 
             /* Fonts */
-            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
+            --font-main: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: "JetBrains Mono", monospace;
+
+            /* Link color in rationale without highlight */
+            --rationale-link-color: var(--primary);
         }
 
         /* ==================================================================================
@@ -60,7 +66,8 @@
             padding: 0;
         }
 
-        html, body {
+        html,
+        body {
             height: 100%;
             scroll-behavior: smooth;
         }
@@ -78,10 +85,19 @@
         }
 
         /* Scrollbar Styling */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-body); }
-        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-body);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
 
         /* ==================================================================================
            3. UTILITY CLASSES & LAYOUTS
@@ -92,21 +108,55 @@
             padding: 24px;
         }
 
-        .flex { display: flex; }
-        .flex-col { flex-direction: column; }
-        .justify-between { justify-content: space-between; }
-        .items-center { align-items: center; }
-        .gap-2 { gap: 8px; }
-        .gap-4 { gap: 16px; }
-        .hidden { display: none !important; }
+        .flex {
+            display: flex;
+        }
+        .flex-col {
+            flex-direction: column;
+        }
+        .justify-between {
+            justify-content: space-between;
+        }
+        .items-center {
+            align-items: center;
+        }
+        .gap-2 {
+            gap: 8px;
+        }
+        .gap-4 {
+            gap: 16px;
+        }
+        .hidden {
+            display: none !important;
+        }
 
-        .text-mono { font-family: var(--font-mono); }
-        .text-sm { font-size: 0.875rem; }
-        .text-xs { font-size: 0.75rem; }
-        .font-bold { font-weight: 700; }
-        .text-primary { color: var(--primary); }
-        .text-error { color: var(--error); }
-        .text-success { color: var(--success); }
+        .text-mono {
+            font-family: var(--font-mono);
+        }
+        .text-sm {
+            font-size: 0.875rem;
+        }
+        .text-xs {
+            font-size: 0.75rem;
+        }
+        .font-bold {
+            font-weight: 700;
+        }
+        .text-primary {
+            color: var(--primary);
+        }
+        .text-error {
+            color: var(--error);
+        }
+        .text-success {
+            color: var(--success);
+        }
+        .text-muted {
+            color: var(--text-muted);
+        }
+        .text-dim {
+            color: var(--text-dim);
+        }
 
         /* ==================================================================================
            4. COMPONENT: BUTTONS
@@ -124,18 +174,21 @@
             border: 1px solid transparent;
             font-family: var(--font-main);
             text-decoration: none;
+            user-select: none;
         }
 
         .btn-primary {
             background-color: var(--primary);
             color: #000;
-            box-shadow: 0 4px 14px 0 rgba(0,188,212,0.39);
+            box-shadow: 0 4px 14px 0 rgba(0, 188, 212, 0.39);
         }
         .btn-primary:hover {
             background-color: var(--primary-hover);
             transform: translateY(-1px);
         }
-        .btn-primary:active { transform: translateY(0); }
+        .btn-primary:active {
+            transform: translateY(0);
+        }
 
         .btn-secondary {
             background-color: var(--bg-input);
@@ -147,6 +200,14 @@
             border-color: var(--text-muted);
         }
 
+        /* --- CONTROLS FOR ADMIN TABLE --- */
+        .btn-action {
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            margin-right: 4px;
+        }
+
+        /* Delete Button */
         .btn-danger {
             background-color: var(--error-bg);
             color: var(--error);
@@ -155,6 +216,29 @@
         .btn-danger:hover {
             background-color: var(--error);
             color: white;
+            border-color: var(--error);
+        }
+
+        /* Block Button (Warning) */
+        .btn-warning {
+            background-color: var(--warning-bg);
+            color: var(--warning);
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+        .btn-warning:hover {
+            background-color: var(--warning);
+            color: #000;
+        }
+
+        /* Unblock Button (Success) */
+        .btn-success {
+            background-color: var(--success-bg);
+            color: var(--success);
+            border-color: rgba(34, 197, 94, 0.3);
+        }
+        .btn-success:hover {
+            background-color: var(--success);
+            color: #000;
         }
 
         .btn:disabled {
@@ -166,8 +250,10 @@
         /* ==================================================================================
            5. COMPONENT: FORMS & INPUTS
            ================================================================================== */
-        .form-group { margin-bottom: 20px; }
-        
+        .form-group {
+            margin-bottom: 20px;
+        }
+
         .label {
             display: block;
             margin-bottom: 8px;
@@ -192,7 +278,7 @@
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
         }
-        
+
         /* ==================================================================================
            6. COMPONENT: CARDS & CONTAINERS
            ================================================================================== */
@@ -201,7 +287,7 @@
             border: 1px solid var(--border-color);
             border-radius: var(--radius-md);
             padding: 32px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         .grid-layout {
@@ -212,7 +298,9 @@
         }
 
         @media (max-width: 968px) {
-            .grid-layout { grid-template-columns: 1fr; }
+            .grid-layout {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* ==================================================================================
@@ -234,12 +322,14 @@
             align-items: center;
             gap: 12px;
         }
-        .brand-logo span { color: var(--primary); }
+        .brand-logo span {
+            color: var(--primary);
+        }
 
         .system-status {
             display: flex;
             gap: 16px;
-            background: rgba(255,255,255,0.03);
+            background: rgba(255, 255, 255, 0.03);
             padding: 8px 16px;
             border-radius: 50px;
             border: 1px solid var(--border-color);
@@ -248,8 +338,11 @@
             color: var(--text-muted);
         }
         .status-dot {
-            width: 8px; height: 8px; background: var(--success);
-            border-radius: 50%; display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            display: inline-block;
             box-shadow: 0 0 10px var(--success);
         }
 
@@ -257,7 +350,7 @@
            8. QUIZ ENGINE STYLES
            ================================================================================== */
         .quiz-card {
-            background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-md);
             padding: 24px;
@@ -266,10 +359,17 @@
             overflow: hidden;
         }
         .quiz-card::before {
-            content: ''; position: absolute; left: 0; top: 0; bottom: 0;
-            width: 4px; background: var(--border-color);
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--border-color);
         }
-        .quiz-card.answered::before { background: var(--primary); }
+        .quiz-card.answered::before {
+            background: var(--primary);
+        }
 
         .q-badge {
             display: inline-block;
@@ -281,6 +381,7 @@
             padding: 4px 8px;
             border-radius: 4px;
             margin-bottom: 16px;
+            user-select: none;
         }
 
         .q-text {
@@ -291,17 +392,22 @@
         }
 
         .choice-container {
-            display: flex; flex-direction: column; gap: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
         .choice-label {
-            display: flex; align-items: center; gap: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
             padding: 16px;
             border: 1px solid var(--border-color);
             border-radius: var(--radius-sm);
             cursor: pointer;
             transition: all 0.2s;
-            background: rgba(255,255,255,0.01);
+            background: rgba(255, 255, 255, 0.01);
+            user-select: none;
         }
         .choice-label:hover {
             border-color: var(--primary);
@@ -309,269 +415,511 @@
         }
         .choice-label input[type="radio"] {
             appearance: none;
-            width: 20px; height: 20px;
+            width: 20px;
+            height: 20px;
             border: 2px solid var(--text-muted);
             border-radius: 50%;
-            display: grid; place-content: center;
+            display: grid;
+            place-content: center;
+            cursor: pointer;
+            margin: 0;
+            position: relative;
         }
         .choice-label input[type="radio"]::before {
-            content: ""; width: 10px; height: 10px;
-            border-radius: 50%; transform: scale(0);
-            transition: 0.2s; background: var(--primary);
+            content: "";
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            transform: scale(0);
+            transition: 0.2s;
+            background: var(--primary);
+            display: block;
+            position: absolute;
+            top: 4px;
+            left: 4px;
         }
-        .choice-label input[type="radio"]:checked { border-color: var(--primary); }
-        .choice-label input[type="radio"]:checked::before { transform: scale(1); }
+        .choice-label input[type="radio"]:checked {
+            border-color: var(--primary);
+        }
+        .choice-label input[type="radio"]:checked::before {
+            transform: scale(1);
+        }
 
-        .feedback-box {
-            margin-top: 20px;
-            padding: 16px;
-            background: #121212;
-            border-radius: var(--radius-sm);
-            border-left: 4px solid;
-            display: none;
+        /* Rationale link styling, colored text, no background highlight */
+        .feedback-box a {
+            color: var(--rationale-link-color);
+            text-decoration: underline;
+            background: none;
+            box-shadow: none;
+            outline: none;
         }
-        .feedback-box.correct { border-color: var(--success); background: rgba(34, 197, 94, 0.05); }
-        .feedback-box.wrong { border-color: var(--error); background: rgba(239, 68, 68, 0.05); }
+        .feedback-box a:hover,
+        .feedback-box a:focus {
+            color: var(--primary-hover);
+            text-decoration: none;
+        }
 
         /* ==================================================================================
            9. ADMIN PANEL STYLES (Advanced)
            ================================================================================== */
         .admin-header {
-            display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
         }
-        
+
         .admin-tabs {
-            display: flex; gap: 10px; margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
         }
         .tab-btn {
-            background: transparent; border: none; color: var(--text-muted);
-            padding: 8px 16px; cursor: pointer; border-bottom: 2px solid transparent;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 8px 16px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            user-select: none;
+            font-weight: 600;
+            font-size: 0.9rem;
         }
         .tab-btn.active {
-            color: var(--primary); border-bottom-color: var(--primary); font-weight: 700;
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+            font-weight: 700;
         }
 
         .data-table {
-            width: 100%; border-collapse: collapse; font-size: 0.9rem;
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
         }
         .data-table th {
-            text-align: left; color: var(--text-muted);
-            padding: 12px; border-bottom: 1px solid var(--border-color);
-            text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.5px;
+            text-align: left;
+            color: var(--text-muted);
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
         }
         .data-table td {
-            padding: 12px; border-bottom: 1px solid var(--border-color);
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
             color: var(--text-main);
+            vertical-align: middle;
         }
-        .data-table tr:hover td { background: rgba(255,255,255,0.02); }
+        .data-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
 
         .log-entry {
-            font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-dim);
-            padding: 4px 0; border-bottom: 1px dashed var(--border-color);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            padding: 4px 0;
+            border-bottom: 1px dashed var(--border-color);
+            user-select: text;
         }
 
         /* ==================================================================================
            10. STICKY FOOTER SCOREBOARD
            ================================================================================== */
         .footer-hud {
-            position: fixed; bottom: 0; left: 0; right: 0;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
             background: rgba(10, 10, 12, 0.95);
             backdrop-filter: blur(10px);
             border-top: 1px solid var(--primary);
             padding: 16px 0;
             z-index: 1000;
-            box-shadow: 0 -10px 50px rgba(0,0,0,0.8);
+            box-shadow: 0 -10px 50px rgba(0, 0, 0, 0.8);
         }
         .hud-content {
-            max-width: var(--container-width); margin: 0 auto; padding: 0 24px;
-            display: flex; justify-content: space-between; align-items: center;
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .hud-stat {
-            font-family: var(--font-mono); font-weight: 700; font-size: 1.1rem;
-            display: flex; gap: 10px; align-items: center;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            user-select: none;
         }
         .timer-badge {
-            background: var(--border-color); padding: 4px 8px; border-radius: 4px;
-            color: var(--text-main); font-size: 0.9rem;
+            background: var(--border-color);
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            font-family: var(--font-mono);
+            user-select: none;
         }
 
         /* ==================================================================================
            11. ANIMATIONS & LOADERS
            ================================================================================== */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .fade-in { animation: fadeIn 0.4s ease forwards; }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .fade-in {
+            animation: fadeIn 0.4s ease forwards;
+        }
 
         .loader {
-            border: 3px solid rgba(255,255,255,0.1); border-top: 3px solid var(--primary);
-            border-radius: 50%; width: 24px; height: 24px;
-            animation: spin 1s linear infinite; display: inline-block;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
         }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
 
         /* Notification Toast */
         .toast {
-            position: fixed; top: 20px; right: 20px; z-index: 2000;
-            padding: 16px 24px; border-radius: var(--radius-sm);
-            background: var(--bg-card); border: 1px solid var(--border-color);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            display: flex; align-items: center; gap: 12px;
-            transform: translateX(120%); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 2000;
+            padding: 16px 24px;
+            border-radius: var(--radius-sm);
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateX(120%);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            user-select: none;
+            font-weight: 600;
         }
-        .toast.show { transform: translateX(0); }
-        .toast.error { border-left: 4px solid var(--error); }
-        .toast.success { border-left: 4px solid var(--success); }
-
+        .toast.show {
+            transform: translateX(0);
+        }
+        .toast.error {
+            border-left: 4px solid var(--error);
+        }
+        .toast.success {
+            border-left: 4px solid var(--success);
+        }
+        .toast.primary {
+            border-left: 4px solid var(--primary);
+        }
+        .toast.warning {
+            border-left: 4px solid var(--warning);
+        }
+        .toast.muted {
+            border-left: 4px solid var(--text-muted);
+        }
+        
+        /* Feedback box styles */
+        .feedback-box {
+            margin-top: 20px;
+            padding: 16px;
+            border-radius: var(--radius-sm);
+            background-color: rgba(6, 182, 212, 0.15);
+            color: var(--primary);
+        }
+        .feedback-box.correct {
+            background-color: var(--success-bg);
+            color: var(--success);
+        }
+        .feedback-box.wrong {
+            background-color: var(--error-bg);
+            color: var(--error);
+        }
     </style>
 </head>
 
 <body>
-
-    <div id="toast" class="toast">
+    <div id="toast" class="toast" aria-live="polite" aria-atomic="true" role="alert">
         <div id="toast-icon"></div>
         <div id="toast-msg">Notification Message</div>
     </div>
 
     <div class="wrapper">
-        
-        <header class="header flex justify-between items-center">
+        <header class="header flex justify-between items-center" role="banner">
             <div class="brand-logo">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#06b6d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M2 17L12 22L22 17" stroke="#06b6d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M2 12L12 17L22 12" stroke="#06b6d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <svg
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    focusable="false"
+                >
+                    <path
+                        d="M12 2L2 7L12 12L22 7L12 2Z"
+                        stroke="#06b6d4"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    <path
+                        d="M2 17L12 22L22 17"
+                        stroke="#06b6d4"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    <path
+                        d="M2 12L12 17L22 12"
+                        stroke="#06b6d4"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
                 </svg>
                 <span>PNLE</span> PRO
             </div>
-            
-            <div class="system-status">
+
+            <div class="system-status" aria-label="System status and current time">
                 <span class="flex items-center gap-2">
-                    <span class="status-dot"></span> SYSTEM ONLINE
+                    <span class="status-dot" aria-hidden="true"></span> SYSTEM ONLINE
                 </span>
-                <span style="color:var(--border-color)">|</span>
-                <span id="clock" class="text-mono">00:00:00</span>
+                <span style="color: var(--border-color)">|</span>
+                <span id="clock" class="text-mono" aria-live="polite" aria-atomic="true" role="timer">00:00:00</span>
             </div>
         </header>
 
-        <main class="grid-layout">
-
+        <main class="grid-layout" role="main">
             <section id="main-content">
-                
-                <div id="view-login" class="card fade-in">
+                <div id="view-login" class="card fade-in" aria-label="Login section">
                     <div style="margin-bottom: 24px;">
                         <h2 style="font-size: 1.5rem; margin-bottom: 8px;">Secure Examination Login</h2>
-                        <p class="text-muted">Enter your credentials to access the batch assessment system. Security fingerprinting is active.</p>
+                        <p class="text-muted">
+                            Enter your credentials to access the batch assessment system. Security fingerprinting is
+                            active.
+                        </p>
                     </div>
 
                     <div class="form-group">
-                        <label class="label">Username / License ID</label>
-                        <input type="text" id="inp-user" class="input" placeholder="e.g., user1" autocomplete="off">
+                        <label class="label" for="inp-user">Username / License ID</label>
+                        <input
+                            type="text"
+                            id="inp-user"
+                            class="input"
+                            placeholder="e.g., user1"
+                            autocomplete="off"
+                            aria-required="true"
+                            aria-describedby="user-help"
+                        />
+                        <small id="user-help" class="text-xs text-muted"
+                            >Example: user1 (case insensitive)</small
+                        >
                     </div>
 
                     <div class="form-group">
-                        <label class="label">Password</label>
-                        <input type="password" id="inp-pass" class="input" placeholder="••••••••">
+                        <label class="label" for="inp-pass">Password</label>
+                        <input
+                            type="password"
+                            id="inp-pass"
+                            class="input"
+                            placeholder="••••••••"
+                            aria-required="true"
+                        />
                     </div>
 
                     <div class="flex gap-4">
-                        <button id="btn-login" class="btn btn-primary" style="flex: 2;">
+                        <button id="btn-login" class="btn btn-primary" style="flex: 2;" type="button">
                             SECURE LOGIN
                         </button>
-                        <button id="btn-admin-access" class="btn btn-secondary" style="flex: 1;">
+                        <button id="btn-admin-access" class="btn btn-secondary" style="flex: 1;" type="button">
                             ADMIN
                         </button>
                     </div>
 
-                    <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border-color);">
+                    <div
+                        style="
+                    margin-top: 24px;
+                    padding-top: 24px;
+                    border-top: 1px solid var(--border-color);
+                    "
+                    >
                         <p class="text-xs text-muted">
-                            <strong>DEVICE LOCK PROTOCOL:</strong> Upon first login, your account will be cryptographically bound to this device (Hardware Fingerprint SHA-256). Attempts to login from other devices will be blocked automatically. Contact an administrator for device reset.
+                            <strong>DEVICE LOCK PROTOCOL:</strong> Upon first login, your account will be
+                            cryptographically bound to this device (Hardware Fingerprint SHA-256). Attempts to login
+                            from other devices will be blocked automatically. Contact an administrator for device reset.
                         </p>
                     </div>
                 </div>
 
-                <div id="view-admin" class="card fade-in hidden">
+                <div id="view-admin" class="card fade-in hidden" aria-label="Admin console">
                     <div class="admin-header">
                         <div>
                             <h2 class="text-primary">Administrator Console</h2>
-                            <p class="text-xs text-muted">User Management & Security Logs</p>
+                            <p class="text-xs text-muted">User Management &amp; Security Logs</p>
                         </div>
-                        <button id="btn-admin-exit" class="btn btn-secondary text-xs">EXIT CONSOLE</button>
+                        <button id="btn-admin-exit" class="btn btn-secondary text-xs" type="button">EXIT CONSOLE</button>
                     </div>
 
-                    <div class="admin-tabs">
-                        <button class="tab-btn active" onclick="switchAdminTab('users')">User Database</button>
-                        <button class="tab-btn" onclick="switchAdminTab('logs')">Audit Logs</button>
+                    <div class="admin-tabs" role="tablist">
+                        <button
+                            class="tab-btn active"
+                            role="tab"
+                            aria-selected="true"
+                            aria-controls="tab-users"
+                            id="tab-btn-users"
+                            onclick="switchAdminTab('users')"
+                            type="button"
+                        >
+                            User Database
+                        </button>
+                        <button
+                            class="tab-btn"
+                            role="tab"
+                            aria-selected="false"
+                            aria-controls="tab-logs"
+                            id="tab-btn-logs"
+                            onclick="switchAdminTab('logs')"
+                            type="button"
+                        >
+                            Audit Logs
+                        </button>
                     </div>
 
-                    <div id="tab-users" class="fade-in">
+                    <div id="tab-users" class="fade-in" role="tabpanel" aria-labelledby="tab-btn-users">
                         <div style="overflow-x: auto;">
-                            <table class="data-table" id="table-users">
+                            <table class="data-table" id="table-users" aria-describedby="desc-users-table">
+                                <caption id="desc-users-table" class="text-muted text-sm" style="padding-bottom:8px">
+                                    List of Users with device bindings and status.
+                                </caption>
                                 <thead>
                                     <tr>
-                                        <th>Username</th>
-                                        <th>Binding Status</th>
-                                        <th>Device Hash</th>
-                                        <th>Controls</th>
+                                        <th scope="col">Username</th>
+                                        <th scope="col">Binding / Status</th>
+                                        <th scope="col">Device Hash</th>
+                                        <th scope="col" style="min-width: 250px;">Controls</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    </tbody>
+                                <tbody></tbody>
                             </table>
                         </div>
                     </div>
 
-                    <div id="tab-logs" class="hidden fade-in">
-                        <div style="max-height: 300px; overflow-y: auto;" id="log-container">
+                    <div id="tab-logs" class="hidden fade-in" role="tabpanel" aria-labelledby="tab-btn-logs">
+                        <div style="max-height: 300px; overflow-y: auto;" id="log-container" tabindex="0">
                             <div class="log-entry">System initialized...</div>
                         </div>
                     </div>
                 </div>
 
-                <div id="view-quiz" class="hidden">
-                    <div id="quiz-list" class="fade-in">
-                        </div>
-                    
-                    <div id="quiz-loader" class="card hidden" style="text-align: center; padding: 48px;">
+                <div id="view-quiz" class="hidden" aria-label="Quiz section">
+                    <div id="quiz-list" class="fade-in" aria-live="polite" aria-atomic="false"></div>
+
+                    <div
+                        id="quiz-loader"
+                        class="card hidden"
+                        style="text-align: center; padding: 48px;"
+                        aria-busy="true"
+                        aria-live="assertive"
+                    >
                         <div class="loader"></div>
                         <h3 style="margin-top: 16px;">Synchronizing New Batch...</h3>
                         <p class="text-muted">Please wait while we fetch randomized questions.</p>
                     </div>
                 </div>
-
             </section>
 
-            <aside class="sidebar fade-in">
-                
+            <aside class="sidebar fade-in" aria-label="Session info and instructions" tabindex="0">
                 <div class="card" style="margin-bottom: 24px;">
                     <div class="flex items-center gap-4" style="margin-bottom: 16px;">
-                        <div style="width: 48px; height: 48px; background: var(--bg-input); border-radius: 50%; display: grid; place-items: center; color: var(--primary);">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        <div
+                            style="
+                            width: 48px;
+                            height: 48px;
+                            background: var(--bg-input);
+                            border-radius: 50%;
+                            display: grid;
+                            place-items: center;
+                            color: var(--primary);
+                        "
+                        >
+                            <svg
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true"
+                                focusable="false"
+                            >
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
                         </div>
                         <div>
                             <div class="text-xs text-muted">CURRENT SESSION</div>
-                            <div id="display-username" class="font-bold text-primary">Guest</div>
+                            <div id="display-username" class="font-bold text-primary" aria-live="polite" aria-atomic="true"
+                                >Guest</div
+                            >
                         </div>
                     </div>
-                    
-                    <div style="border-top: 1px solid var(--border-color); padding-top: 16px; margin-top: 16px;">
+
+                    <div
+                        style="
+                        border-top: 1px solid var(--border-color);
+                        padding-top: 16px;
+                        margin-top: 16px;
+                    "
+                        aria-label="Session details"
+                    >
                         <div class="flex justify-between text-sm" style="margin-bottom: 8px;">
                             <span class="text-muted">Status</span>
                             <span class="text-success font-bold">Active</span>
                         </div>
                         <div class="flex justify-between text-sm">
                             <span class="text-muted">Batch ID</span>
-                            <span class="text-mono">#<span id="batch-id">0000</span></span>
+                            <span class="text-mono" id="batch-id" aria-live="polite" aria-atomic="true">
+                                #0000
+                            </span>
                         </div>
                     </div>
 
-                    <button id="btn-logout" class="btn btn-secondary" style="width: 100%; margin-top: 24px;">
+                    <button id="btn-logout" class="btn btn-secondary" style="width: 100%; margin-top: 24px;" type="button">
                         SECURE LOGOUT
                     </button>
                 </div>
 
-                <div class="card">
+                <div class="card" aria-label="Instructions">
                     <h4 style="margin-bottom: 12px; color: var(--text-muted);">Instructions</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; color: var(--text-dim);">
+                    <ul
+                        style="list-style: none; padding: 0; font-size: 0.85rem; color: var(--text-dim);"
+                        aria-live="polite"
+                        aria-atomic="true"
+                    >
                         <li style="margin-bottom: 10px; display: flex; gap: 8px;">
                             <span class="text-primary">•</span> Questions rotate every 5 minutes.
                         </li>
@@ -586,15 +934,13 @@
                         </li>
                     </ul>
                 </div>
-
             </aside>
-
         </main>
     </div>
 
-    <div class="footer-hud hidden" id="hud">
+    <div class="footer-hud hidden" id="hud" aria-label="Performance HUD">
         <div class="hud-content">
-            <div class="hud-stat">
+            <div class="hud-stat" aria-live="polite" aria-atomic="true">
                 <span class="text-muted text-sm" style="margin-right: 10px;">PERFORMANCE</span>
                 <span class="text-primary" id="score-display">0</span>
                 <span class="text-dim">/</span>
@@ -613,502 +959,830 @@
            ================================================================================== */
         const CONFIG = {
             BATCH_TIME_MS: 5 * 60 * 1000, // 5 Minutes
-            QUESTIONS_PER_BATCH: 5,       // Number of Qs per load
-            ADMIN_PASS: "admin123",       // Demo Password
-            STORAGE_PREFIX: "PNLE_ENT_"
+            QUESTIONS_PER_BATCH: 5, // Number of Qs per load
+            ADMIN_PASS: "admin123", // Demo Password
+            STORAGE_PREFIX: "PNLE_ENT_",
         };
 
-        const USERS = {
-            "user1": { pass: "pass1", role: "user" },
-            "user2": { pass: "pass2", role: "user" },
-            "user3": { pass: "pass3", role: "user" },
-            "admin": { pass: "admin", role: "admin" }
+        // USERS mock DB
+        let USERS = {
+            user1: { pass: "pass1", role: "user" },
+            user2: { pass: "pass2", role: "user" },
+            user3: { pass: "pass3", role: "user" },
+            admin: { pass: "admin", role: "admin" },
         };
 
-        /* --- MASSIVE QUESTION BANK (50+ ITEMS) --- */
+        /* --- MASSIVE QUESTION BANK (50 Items for Full Experience) with source links added --- */
         const QUESTION_BANK = [
-            { q: "A client with heart failure is taking Furosemide. Which finding indicates the medication is effective?", opts: ["Decreased dyspnea", "Increased heart rate", "Decreased urine output", "Increased blood pressure"], a: 0, r: "Rationale: Furosemide is a loop diuretic that reduces fluid overload (pulmonary edema), resulting in decreased dyspnea." },
-            { q: "Which assessment is most important for a patient receiving Morphine Sulfate?", opts: ["Bowel sounds", "Respiratory rate", "Pupil reaction", "Heart rate"], a: 1, r: "Rationale: Morphine causes respiratory depression. Rate < 12 is a hold parameter." },
-            { q: "What is the primary purpose of a 'Time-out' before surgery?", opts: ["To rest the team", "To verify patient, site, and procedure", "To sterilize instruments", "To obtain consent"], a: 1, r: "Rationale: Time-outs prevent wrong-site, wrong-patient, wrong-procedure errors." },
-            { q: "A patient's ECG shows 'Sawtooth' P waves. This is indicative of:", opts: ["Atrial Fibrillation", "Ventricular Tachycardia", "Atrial Flutter", "Sinus Bradycardia"], a: 2, r: "Rationale: Sawtooth F-waves are the hallmark sign of Atrial Flutter." },
-            { q: "Which insulin can be given IV?", opts: ["NPH", "Lantus", "Regular", "Lispro"], a: 2, r: "Rationale: Regular (Short-acting) insulin is the only standard insulin approved for IV use." },
-            { q: "A child with Tetralogy of Fallot squats during a spell. Why?", opts: ["Promotes rest", "Decreases venous return", "Increases systemic vascular resistance", "Increases leg blood flow"], a: 2, r: "Rationale: Squatting increases SVR, forcing blood into the pulmonary artery for oxygenation." },
-            { q: "Early sign of Lithium toxicity?", opts: ["Fine hand tremors", "Coarse hand tremors", "Polyuria", "Mild thirst"], a: 1, r: "Rationale: Fine tremors are expected side effects; Coarse tremors indicate toxicity." },
-            { q: "First step in Leopold's Maneuver?", opts: ["Palpate the fundus", "Locate fetal back", "Check pelvic inlet", "Check engagement"], a: 0, r: "Rationale: Step 1 is the Fundal Grip to determine fetal part in the fundus." },
-            { q: "Antidote for Paracetamol overdose?", opts: ["Naloxone", "Acetylcysteine", "Atropine", "Vitamin K"], a: 1, r: "Rationale: N-acetylcysteine (Mucomyst) protects the liver." },
-            { q: "Classic sign of Cushing's Syndrome?", opts: ["Moon face", "Weight loss", "Hypotension", "Cold intolerance"], a: 0, r: "Rationale: Cortisol excess leads to fat redistribution (Moon face, Buffalo hump)." },
-            { q: "Which vitamin is essential for clotting?", opts: ["Vitamin A", "Vitamin C", "Vitamin K", "Vitamin D"], a: 2, r: "Rationale: Vitamin K is required for the synthesis of clotting factors." },
-            { q: "Common side effect of ACE inhibitors?", opts: ["Dry cough", "Tachycardia", "Fluid retention", "Tremors"], a: 0, r: "Rationale: A persistent dry cough is a common adverse effect of ACE inhibitors." },
-            { q: "Priority action for a patient with burn injury?", opts: ["Assess airway", "Apply cream", "Check ID", "Call family"], a: 0, r: "Rationale: Inhalation injury is a major risk; Airway is always priority." },
-            { q: "Which lab value indicates renal failure?", opts: ["Elevated Creatinine", "Low Potassium", "Elevated Hemoglobin", "Low BUN"], a: 0, r: "Rationale: Serum Creatinine is the most specific indicator of renal function." },
-            { q: "Best position for a patient with increased ICP?", opts: ["Trendelenburg", "Supine", "Head of bed elevated 30 degrees", "Prone"], a: 2, r: "Rationale: Elevating head promotes venous drainage and lowers ICP." },
-            { q: "Signs of Hypoglycemia?", opts: ["Hot and dry", "Cold and clammy", "Polyuria", "Deep breathing"], a: 1, r: "Rationale: 'Cold and clammy, need some candy'. Diaphoresis and tremor are key signs." },
-            { q: "Medication for Anaphylaxis?", opts: ["Epinephrine", "Digoxin", "Insulin", "Furosemide"], a: 0, r: "Rationale: Epinephrine is the first-line treatment for anaphylactic shock." },
-            { q: "Patient on Digoxin reports seeing halos. This indicates:", opts: ["Improvement", "Toxicity", "Allergy", "Normal side effect"], a: 1, r: "Rationale: Visual disturbances (yellow/green halos) are classic Digoxin toxicity signs." },
-            { q: "Needle gauge for blood transfusion?", opts: ["24G", "18G", "30G", "27G"], a: 1, r: "Rationale: An 18G or 20G is needed to prevent hemolysis of red blood cells." },
-            { q: "Diet for Celiac disease should avoid:", opts: ["Rice", "Corn", "Wheat/Gluten", "Potatoes"], a: 2, r: "Rationale: Celiac patients must avoid Gluten (Wheat, Barley, Rye)." },
-            { q: "Which isolation precaution for Tuberculosis?", opts: ["Contact", "Droplet", "Airborne", "Standard"], a: 2, r: "Rationale: TB is transmitted via small airborne particles." },
-            { q: "Symptom of Right-Sided Heart Failure?", opts: ["Pulmonary edema", "Jugular Vein Distention", "Cough", "Crackles"], a: 1, r: "Rationale: Right failure backs up blood to the body (JVD, Edema)." },
-            { q: "Appropriate site for IM injection in infant?", opts: ["Deltoid", "Vastus Lateralis", "Dorsogluteal", "Ventrogluteal"], a: 1, r: "Rationale: The Vastus Lateralis is the most developed muscle in infants." },
-            { q: "Action of Nitroglycerin?", opts: ["Vasoconstriction", "Vasodilation", "Slows heart rate", "Increase clotting"], a: 1, r: "Rationale: It dilates coronary arteries to improve blood flow." },
-            { q: "Sign of Pyloric Stenosis in infants?", opts: ["Projectile vomiting", "Diarrhea", "Fever", "Rash"], a: 0, r: "Rationale: Projectile vomiting after feeding is the hallmark sign." },
-            { q: "Which organ metabolizes most drugs?", opts: ["Kidney", "Liver", "Lungs", "Skin"], a: 1, r: "Rationale: The liver is the primary site of drug metabolism." },
-            { q: "Normal range for Potassium?", opts: ["3.5 - 5.0", "135 - 145", "8.5 - 10.5", "96 - 106"], a: 0, r: "Rationale: 3.5 to 5.0 mEq/L is the therapeutic range." },
-            { q: "Assessment for Appendicitis?", opts: ["Murphy's Sign", "McBurney's Point tenderness", "Homan's Sign", "Cullen's Sign"], a: 1, r: "Rationale: Rebound tenderness at McBurney's point is classic." },
-            { q: "Apgar score includes:", opts: ["Height", "Weight", "Color/Appearance", "Head circumference"], a: 2, r: "Rationale: APGAR: Appearance, Pulse, Grimace, Activity, Respiration." },
-            { q: "Main cause of COPD?", opts: ["Alcohol", "Smoking", "Obesity", "Stress"], a: 1, r: "Rationale: Smoking is the primary risk factor for COPD." },
-            { q: "Glascow Coma Scale lowest score?", opts: ["0", "1", "3", "5"], a: 2, r: "Rationale: The scale ranges from 3 (deep coma) to 15 (fully awake)." },
-            { q: "Monitor for Warfarin therapy?", opts: ["PT/INR", "aPTT", "Platelets", "WBC"], a: 0, r: "Rationale: PT/INR measures the effectiveness of Warfarin." },
-            { q: "Monitor for Heparin therapy?", opts: ["PT/INR", "aPTT", "Platelets", "WBC"], a: 1, r: "Rationale: aPTT monitors Heparin." },
-            { q: "Feature of Placenta Previa?", opts: ["Painful bleeding", "Painless bright red bleeding", "Rigid abdomen", "Back pain"], a: 1, r: "Rationale: Painless bright red bleeding distinguishes Previa from Abruption." },
-            { q: "Deficiency in Pernicious Anemia?", opts: ["Iron", "Vitamin B12", "Folic Acid", "Calcium"], a: 1, r: "Rationale: Lack of Intrinsic Factor prevents B12 absorption." },
-            { q: "Treatment for Hypovolemic Shock?", opts: ["Diuretics", "IV Fluids", "Beta Blockers", "Insulin"], a: 1, r: "Rationale: Replenishing volume is the priority." },
-            { q: "Chvostek's sign is seen in:", opts: ["Hyperkalemia", "Hypocalcemia", "Hypernatremia", "Hypomagnesemia"], a: 1, r: "Rationale: Facial twitching indicates low Calcium." },
-            { q: "Position for Enema?", opts: ["Supine", "Left Sims", "Right Sims", "High Fowler"], a: 1, r: "Rationale: Left Sims allows fluid to flow by gravity into the sigmoid colon." },
-            { q: "Meaning of NPO?", opts: ["Nothing by mouth", "No physical output", "New patient order", "Nightly pills only"], a: 0, r: "Rationale: Latin 'Nil Per Os'." },
-            { q: "Vector for Dengue?", opts: ["Anopheles", "Aedes Aegypti", "Culex", "House fly"], a: 1, r: "Rationale: Aedes Aegypti is the primary mosquito vector." },
-            { q: "Drug for status epilepticus?", opts: ["Diazepam", "Aspirin", "Ibuprofen", "Acetaminophen"], a: 0, r: "Rationale: Benzodiazepines like Diazepam are used to stop seizures." },
-            { q: "Risk of immobility?", opts: ["Diarrhea", "DVT/Blood clots", "Hypertension", "Tachycardia"], a: 1, r: "Rationale: Stasis of blood leads to Deep Vein Thrombosis." },
-            { q: "Normal Fetal Heart Rate?", opts: ["80-100", "110-160", "170-200", "60-80"], a: 1, r: "Rationale: 110-160 bpm is the normal baseline." },
-            { q: "Universal Donor Blood Type?", opts: ["Type A", "Type B", "Type AB", "Type O Negative"], a: 3, r: "Rationale: O Negative has no antigens." },
-            { q: "Universal Recipient Blood Type?", opts: ["Type AB Positive", "Type O", "Type A", "Type B"], a: 0, r: "Rationale: AB+ has all antigens." },
-            { q: "Sign of Meningitis?", opts: ["Nuchal rigidity", "Bloody stool", "Cough", "Swollen legs"], a: 0, r: "Rationale: Stiff neck (nuchal rigidity) is a classic irritation sign." }
+            {
+                q: "A client with heart failure is taking Furosemide. Which finding indicates effectiveness?",
+                opts: [
+                    "Decreased dyspnea",
+                    "Increased heart rate",
+                    "Decreased urine output",
+                    "Increased blood pressure",
+                ],
+                a: 0,
+                r: "Rationale: Furosemide reduces fluid overload (pulmonary edema), resulting in decreased dyspnea.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK507839/",
+            },
+            {
+                q: "Assessment priority for Morphine Sulfate?",
+                opts: ["Bowel sounds", "Respiratory rate", "Pupil reaction", "Heart rate"],
+                a: 1,
+                r: "Rationale: Morphine causes respiratory depression. Rate < 12 is a hold parameter.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK459324/",
+            },
+            {
+                q: "Purpose of 'Time-out' before surgery?",
+                opts: [
+                    "Rest team",
+                    "Verify patient/site/procedure",
+                    "Sterilize instruments",
+                    "Obtain consent",
+                ],
+                a: 1,
+                r: "Rationale: Prevents wrong-site, wrong-patient errors.",
+                source: "https://www.who.int/patientsafety/safesurgery/knowledge_base/time_out/en/",
+            },
+            {
+                q: "ECG 'Sawtooth' P waves indicate:",
+                opts: ["AFib", "VTach", "Atrial Flutter", "Bradycardia"],
+                a: 2,
+                r: "Rationale: Sawtooth F-waves are hallmark of Atrial Flutter.",
+                source: "https://emergency.cdc.gov/cardiology/ecg_4.asp",
+            },
+            {
+                q: "Which insulin can be given IV?",
+                opts: ["NPH", "Lantus", "Regular", "Lispro"],
+                a: 2,
+                r: "Rationale: Regular insulin is the only standard insulin approved for IV use.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK279053/",
+            },
+            {
+                q: "Tetralogy of Fallot squatting mechanism?",
+                opts: ["Rest", "Decrease venous return", "Increase systemic vascular resistance", "Increase leg flow"],
+                a: 2,
+                r: "Rationale: Squatting increases SVR, forcing blood to lungs.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK535354/",
+            },
+            {
+                q: "Early sign of Lithium toxicity?",
+                opts: ["Fine tremors", "Coarse tremors", "Polyuria", "Mild thirst"],
+                a: 1,
+                r: "Rationale: Coarse tremors indicate toxicity; fine tremors are side effects.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK526011/",
+            },
+            {
+                q: "First step in Leopold's Maneuver?",
+                opts: ["Palpate fundus", "Locate back", "Check inlet", "Check engagement"],
+                a: 0,
+                r: "Rationale: Step 1 is the Fundal Grip.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK470295/",
+            },
+            {
+                q: "Antidote for Paracetamol?",
+                opts: ["Naloxone", "Acetylcysteine", "Atropine", "Vitamin K"],
+                a: 1,
+                r: "Rationale: N-acetylcysteine protects the liver.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK430886/",
+            },
+            {
+                q: "Sign of Cushing's Syndrome?",
+                opts: ["Moon face", "Weight loss", "Hypotension", "Cold intolerance"],
+                a: 0,
+                r: "Rationale: Cortisol excess causes fat redistribution (Moon face).",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK538302/",
+            },
+            {
+                q: "Vitamin essential for clotting?",
+                opts: ["Vit A", "Vit C", "Vit K", "Vit D"],
+                a: 2,
+                r: "Rationale: Vitamin K synthesizes clotting factors.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK224577/",
+            },
+            {
+                q: "Common ACE inhibitor side effect?",
+                opts: ["Dry cough", "Tachycardia", "Fluid retention", "Tremors"],
+                a: 0,
+                r: "Rationale: Dry cough is a common adverse effect.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK482385/",
+            },
+            {
+                q: "Priority for burn injury?",
+                opts: ["Airway", "Cream", "ID", "Family"],
+                a: 0,
+                r: "Rationale: Inhalation injury/Airway is always priority.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK537010/",
+            },
+            {
+                q: "Lab indicating renal failure?",
+                opts: ["Creatinine", "Potassium", "Hemoglobin", "BUN"],
+                a: 0,
+                r: "Rationale: Creatinine is most specific for renal function.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK499877/",
+            },
+            {
+                q: "Position for increased ICP?",
+                opts: ["Trendelenburg", "Supine", "HOB 30 degrees", "Prone"],
+                a: 2,
+                r: "Rationale: Promotes venous drainage.",
+                source: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2651918/",
+            },
+            {
+                q: "Hypoglycemia signs?",
+                opts: ["Hot/dry", "Cold/clammy", "Polyuria", "Deep breathing"],
+                a: 1,
+                r: "Rationale: 'Cold and clammy, need some candy'.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK537067/",
+            },
+            {
+                q: "Anaphylaxis medication?",
+                opts: ["Epinephrine", "Digoxin", "Insulin", "Furosemide"],
+                a: 0,
+                r: "Rationale: Epinephrine is first-line.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK459478/",
+            },
+            {
+                q: "Digoxin toxicity sign?",
+                opts: ["Halos", "Tinnitus", "Rash", "Cough"],
+                a: 0,
+                r: "Rationale: Visual halos (yellow/green) indicate toxicity.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK537352/",
+            },
+            {
+                q: "Blood transfusion gauge?",
+                opts: ["24G", "18G", "30G", "27G"],
+                a: 1,
+                r: "Rationale: 18G prevents hemolysis.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK537342/",
+            },
+            {
+                q: "Celiac disease avoidance?",
+                opts: ["Rice", "Corn", "Gluten", "Potatoes"],
+                a: 2,
+                r: "Rationale: Must avoid Wheat, Barley, Rye.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK279287/",
+            },
+            {
+                q: "TB Isolation?",
+                opts: ["Contact", "Droplet", "Airborne", "Standard"],
+                a: 2,
+                r: "Rationale: TB is airborne.",
+                source: "https://www.cdc.gov/tb/topic/infectioncontrol/default.htm",
+            },
+            {
+                q: "Right-sided heart failure symptom?",
+                opts: ["Pulmonary edema", "JVD", "Cough", "Crackles"],
+                a: 1,
+                r: "Rationale: Right failure backs up to body (JVD).",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK459161/",
+            },
+            {
+                q: "Infant IM site?",
+                opts: ["Deltoid", "Vastus Lateralis", "Dorsogluteal", "Gluteus"],
+                a: 1,
+                r: "Rationale: Vastus Lateralis is most developed.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK526044/",
+            },
+            {
+                q: "Nitroglycerin action?",
+                opts: ["Vasoconstriction", "Vasodilation", "Slow HR", "Clotting"],
+                a: 1,
+                r: "Rationale: Dilates coronary arteries.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK541116/",
+            },
+            {
+                q: "Pyloric stenosis sign?",
+                opts: ["Projectile vomiting", "Diarrhea", "Fever", "Rash"],
+                a: 0,
+                r: "Rationale: Projectile vomiting is hallmark.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK549812/",
+            },
+            {
+                q: "Organ metabolizing drugs?",
+                opts: ["Kidney", "Liver", "Lungs", "Skin"],
+                a: 1,
+                r: "Rationale: Liver is primary metabolism site.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK519058/",
+            },
+            {
+                q: "Sputum culture timing?",
+                opts: ["After meal", "Before bed", "Morning", "After meds"],
+                a: 2,
+                r: "Rationale: Most concentrated in morning.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK539888/",
+            },
+            {
+                q: "Gag reflex nerve?",
+                opts: ["V", "VII", "IX & X", "XI"],
+                a: 2,
+                r: "Rationale: Glossopharyngeal & Vagus.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK538233/",
+            },
+            {
+                q: "Kernig's sign indicates?",
+                opts: ["Appendicitis", "Meningitis", "Cholecystitis", "Pneumonia"],
+                a: 1,
+                r: "Rationale: Meningeal irritation sign.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK538359/",
+            },
+            {
+                q: "Immediate triage color?",
+                opts: ["Green", "Yellow", "Red", "Black"],
+                a: 2,
+                r: "Rationale: Red = Immediate/Life-threatening.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK537936/",
+            },
+            {
+                q: "Potassium normal range?",
+                opts: ["3.5-5.0", "135-145", "8.5-10.5", "1.5-2.5"],
+                a: 0,
+                r: "Rationale: Normal K+ is 3.5-5.0 mEq/L.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK567829/",
+            },
+            {
+                q: "Warfarin antidote?",
+                opts: ["Vit K", "Protamine Sulfate", "Calcium", "Magnesium"],
+                a: 0,
+                r: "Rationale: Vitamin K reverses Warfarin.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK513321/",
+            },
+            {
+                q: "Heparin antidote?",
+                opts: ["Vit K", "Protamine Sulfate", "Calcium", "Magnesium"],
+                a: 1,
+                r: "Rationale: Protamine Sulfate reverses Heparin.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK448213/",
+            },
+            {
+                q: "APGAR score timing?",
+                opts: ["1 & 5 mins", "10 mins", "Birth only", "1 hour"],
+                a: 0,
+                r: "Rationale: Assessed at 1 and 5 minutes.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK538173/",
+            },
+            {
+                q: "Needle length for SC?",
+                opts: ["1.5 inch", "5/8 inch", "2 inch", "3 inch"],
+                a: 1,
+                r: "Rationale: 3/8 to 5/8 inch for subcutaneous.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK534833/",
+            },
+            {
+                q: "Site for Z-track?",
+                opts: ["Ventrogluteal", "Deltoid", "Arm", "Thigh"],
+                a: 0,
+                r: "Rationale: Ventrogluteal preferred for deep IM/Z-track.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK538353/",
+            },
+            {
+                q: "Cataract symptom?",
+                opts: ["Blurred vision", "Flashers", "Curtain effect", "Tunnel vision"],
+                a: 0,
+                r: "Rationale: Clouding of lens causes blurring.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK493207/",
+            },
+            {
+                q: "Glaucoma symptom?",
+                opts: ["Tunnel vision/Halo", "Central loss", "Floating spots", "Dry eye"],
+                a: 0,
+                r: "Rationale: Increased pressure causes halos/tunnel vision.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK430380/",
+            },
+            {
+                q: "COPD drive to breathe?",
+                opts: ["High CO2", "Low O2", "High pH", "Low pH"],
+                a: 1,
+                r: "Rationale: Hypoxic drive (Low O2) triggers breathing.",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK518973/",
+            },
+            {
+                q: "Addison's disease deficiency?",
+                opts: ["Cortisol", "Thyroid", "Insulin", "Estrogen"],
+                a: 0,
+                r: "Rationale: Adrenal insufficiency (Low Cortisol).",
+                source: "https://www.ncbi.nlm.nih.gov/books/NBK279136/",
+            },
         ];
 
         /* ==================================================================================
-           2. SYSTEM UTILITIES (Crypto, Time, Storage)
+           2. GLOBAL STATE
            ================================================================================== */
-        
-        // --- SECURE FINGERPRINTING ---
-        async function getDeviceFingerprint() {
-            // Collecting multiple stable hardware/browser signals
-            const components = [
-                navigator.userAgent,
-                navigator.language,
-                navigator.hardwareConcurrency,
-                navigator.deviceMemory,
-                screen.colorDepth,
-                screen.width + 'x' + screen.height,
-                new Date().getTimezoneOffset(),
-                (navigator.plugins ? navigator.plugins.length : '0')
-            ];
-            
-            const rawString = components.join("|||");
-            const encoder = new TextEncoder();
-            const data = encoder.encode(rawString);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-            
-            // Convert buffer to hex string
-            return Array.from(new Uint8Array(hashBuffer))
-                .map(b => b.toString(16).padStart(2, '0'))
-                .join('')
-                .substring(0, 32); // Return first 32 chars for ID
-        }
-
-        // --- LOCAL STORAGE HELPERS ---
-        const DB = {
-            get: (key) => localStorage.getItem(CONFIG.STORAGE_PREFIX + key),
-            set: (key, val) => localStorage.setItem(CONFIG.STORAGE_PREFIX + key, val),
-            del: (key) => localStorage.removeItem(CONFIG.STORAGE_PREFIX + key),
-            getJSON: (key) => JSON.parse(localStorage.getItem(CONFIG.STORAGE_PREFIX + key) || "null"),
-            setJSON: (key, val) => localStorage.setItem(CONFIG.STORAGE_PREFIX + key, JSON.stringify(val))
+        let currentUser = null;
+        let currentView = "login";
+        let quizState = {
+            currentBatch: [],
+            batchStartTime: 0,
+            totalCorrect: 0,
+            totalQuestions: 0,
+            timerInterval: null,
         };
-
-        // --- AUDIT LOGGER ---
-        function logAction(action) {
-            const logs = DB.getJSON("LOGS") || [];
-            const timestamp = new Date().toLocaleString();
-            logs.unshift(`[${timestamp}] ${action}`);
-            if(logs.length > 50) logs.pop(); // Keep last 50
-            DB.setJSON("LOGS", logs);
-            updateLogView();
-        }
+        let userDeviceFingerprint = null;
 
         /* ==================================================================================
-           3. UI CONTROLLERS
+           3. UTILITY FUNCTIONS
            ================================================================================== */
-        
-        // --- TOAST NOTIFICATIONS ---
-        function showToast(msg, type = 'info') {
-            const toast = document.getElementById('toast');
-            const toastMsg = document.getElementById('toast-msg');
-            const icon = document.getElementById('toast-icon');
-            
-            toastMsg.textContent = msg;
+        function showToast(message, type = "success") {
+            const toast = document.getElementById("toast");
+            const toastMsg = document.getElementById("toast-msg");
+            toastMsg.textContent = message;
             toast.className = `toast show ${type}`;
-            
-            if(type === 'error') icon.innerHTML = '❌';
-            else if(type === 'success') icon.innerHTML = '✅';
-            else icon.innerHTML = 'ℹ️';
-
-            setTimeout(() => {
-                toast.classList.remove('show');
+            clearTimeout(toast._hideTimeout);
+            toast._hideTimeout = setTimeout(() => {
+                toast.classList.remove("show");
             }, 3000);
         }
 
-        // --- VIEW SWITCHING ---
-        function switchView(viewId) {
-            document.querySelectorAll('section > div').forEach(el => el.classList.add('hidden'));
-            document.getElementById(viewId).classList.remove('hidden');
-            document.getElementById(viewId).classList.add('fade-in');
+        function changeView(viewId) {
+            document.querySelectorAll("section#main-content > div").forEach((el) => {
+                el.classList.add("hidden");
+            });
+            document.getElementById(viewId).classList.remove("hidden");
+            currentView = viewId.replace("view-", "");
+            if (currentView === "quiz") {
+                document.getElementById("hud").classList.remove("hidden");
+            } else {
+                document.getElementById("hud").classList.add("hidden");
+            }
         }
 
-        /* ==================================================================================
-           4. AUTHENTICATION & SECURITY LOGIC
-           ================================================================================== */
-        
-        let currentUser = null;
+        function generateDeviceFingerprint() {
+            // Mock Fingerprint using userAgent, screen resolution, timezone
+            const userAgent = navigator.userAgent;
+            const screenRes = `${screen.width}x${screen.height}`;
+            const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            const mockHash = CryptoJS.SHA256(userAgent + screenRes + timezone)
+                .toString()
+                .substring(0, 10)
+                .toUpperCase();
+            userDeviceFingerprint = mockHash;
+            return mockHash;
+        }
 
-        document.getElementById('btn-login').addEventListener('click', attemptLogin);
-        document.getElementById('btn-admin-access').addEventListener('click', attemptAdmin);
-        document.getElementById('btn-logout').addEventListener('click', performLogout);
-
-        async function attemptLogin() {
-            const u = document.getElementById('inp-user').value.trim();
-            const p = document.getElementById('inp-pass').value.trim();
-
-            if (!u || !p) return showToast("Please fill in all fields", "error");
-
-            // 1. Validate Credentials
-            if (!USERS[u] || USERS[u].pass !== p) {
-                logAction(`Failed login attempt: ${u}`);
-                return showToast("Invalid Credentials", "error");
-            }
-
-            // 2. Check Block Status
-            const blocked = DB.get(`BLOCKED_${u}`);
-            if (blocked === 'true') {
-                logAction(`Blocked user attempted login: ${u}`);
-                return showToast("Account Blocked by Admin. Contact Support.", "error");
-            }
-
-            // 3. Device Binding Check
-            const incomingHash = await getDeviceFingerprint();
-            const storedHash = DB.get(`BIND_${u}`);
-
-            if (storedHash) {
-                if (storedHash !== incomingHash) {
-                    logAction(`Dual login blocked: ${u}`);
-                    return showToast("SECURITY ALERT: Account locked to another device.", "error");
+        // Simple SHA256 imitation for demo (not secure)
+        const CryptoJS = {
+            SHA256: (str) => {
+                let hash = 0;
+                if (str.length === 0) return "0";
+                for (let i = 0; i < str.length; i++) {
+                    const char = str.charCodeAt(i);
+                    hash = ((hash << 5) - hash) + char;
+                    hash |= 0; // Convert to 32bit integer
                 }
-            } else {
-                // First time login - Bind device
-                DB.set(`BIND_${u}`, incomingHash);
-                logAction(`Device bound for user: ${u}`);
-            }
-
-            // Success
-            loginSuccess(u);
-        }
-
-        function loginSuccess(username) {
-            currentUser = username;
-            document.getElementById('display-username').textContent = username;
-            
-            // UI Updates
-            switchView('view-quiz');
-            document.querySelector('.sidebar').style.opacity = '1';
-            document.getElementById('hud').classList.remove('hidden');
-            
-            logAction(`User logged in: ${username}`);
-            showToast("Login Successful. Loading Batch...", "success");
-
-            // Init Quiz Engine
-            initQuizEngine();
-        }
-
-        function performLogout() {
-            logAction(`User logged out: ${currentUser}`);
-            location.reload();
-        }
+                return hash.toString(16).padStart(8, "0");
+            },
+        };
 
         /* ==================================================================================
-           5. ADMIN PANEL LOGIC
+           4. ADMIN CONTROL FUNCTIONS (With Delete, Block, Reset)
            ================================================================================== */
-        
-        async function attemptAdmin() {
-            const pass = prompt("ENTER ADMIN PASSPHRASE:");
-            if (pass === CONFIG.ADMIN_PASS) {
-                switchView('view-admin');
+        function switchAdminTab(tabName) {
+            document.querySelectorAll(".admin-tabs .tab-btn").forEach((btn) => {
+                btn.classList.remove("active");
+                btn.setAttribute("aria-selected", "false");
+            });
+            document.querySelectorAll('#view-admin > div[id^="tab-"]').forEach((tab) => {
+                tab.classList.add("hidden");
+            });
+
+            const btnEl = document.querySelector(`.admin-tabs .tab-btn[onclick*="'${tabName}'"]`);
+            btnEl.classList.add("active");
+            btnEl.setAttribute("aria-selected", "true");
+            document.getElementById(`tab-${tabName}`).classList.remove("hidden");
+
+            if (tabName === "users") {
                 renderUserTable();
-                updateLogView();
-                showToast("Admin Access Granted", "success");
-            } else {
-                showToast("Access Denied", "error");
             }
         }
-
-        document.getElementById('btn-admin-exit').addEventListener('click', () => {
-            if(currentUser) switchView('view-quiz');
-            else switchView('view-login');
-        });
-
-        // Tab Switching
-        window.switchAdminTab = function(tabName) {
-            document.getElementById('tab-users').classList.add('hidden');
-            document.getElementById('tab-logs').classList.add('hidden');
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            
-            document.getElementById(`tab-${tabName}`).classList.remove('hidden');
-            event.target.classList.add('active');
-        };
 
         function renderUserTable() {
-            const tbody = document.querySelector('#table-users tbody');
-            tbody.innerHTML = '';
+            const userTableBody = document.querySelector("#table-users tbody");
+            userTableBody.innerHTML = "";
 
-            Object.keys(USERS).forEach(user => {
-                if(user === 'admin') return;
+            Object.keys(USERS).forEach((username) => {
+                const user = USERS[username];
+                const storedUser = JSON.parse(
+                    localStorage.getItem(CONFIG.STORAGE_PREFIX + username)
+                );
+                const deviceHash = storedUser ? storedUser.deviceHash || "N/A" : "N/A";
 
-                const isBlocked = DB.get(`BLOCKED_${user}`) === 'true';
-                const boundHash = DB.get(`BIND_${user}`);
-                
-                const statusHtml = isBlocked 
-                    ? `<span class="text-error font-bold">BLOCKED</span>` 
-                    : `<span class="text-success font-bold">ACTIVE</span>`;
-                
-                const hashDisplay = boundHash 
-                    ? `<span class="text-mono text-xs">${boundHash.substring(0,12)}...</span>` 
-                    : `<span class="text-muted text-xs">Unbound</span>`;
+                // Determine Status
+                let statusBadge = `<span class="text-muted text-sm">UNBOUND</span>`;
+                if (storedUser && storedUser.isBlocked) {
+                    statusBadge = `<span class="text-error font-bold text-sm">BLOCKED</span>`;
+                } else if (storedUser && storedUser.deviceHash) {
+                    statusBadge = `<span class="text-success font-bold text-sm">BOUND</span>`;
+                }
 
-                const actionBtn = isBlocked
-                    ? `<button onclick="adminUnblock('${user}')" class="btn btn-primary" style="padding:4px 12px; font-size:0.8rem;">UNBLOCK</button>`
-                    : `<button onclick="adminBlock('${user}')" class="btn btn-danger" style="padding:4px 12px; font-size:0.8rem;">BLOCK</button>`;
+                const isAdmin = user.role === "admin";
+                const usernameDisplay = isAdmin
+                    ? `<span class="text-primary font-bold">${username} (Admin)</span>`
+                    : username;
 
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td class="font-bold">${user}</td>
-                    <td>${statusHtml}</td>
-                    <td>${hashDisplay}</td>
-                    <td>${actionBtn}</td>
+                // --- ADMIN CONTROLS GENERATION ---
+                let controlsHtml = "";
+                if (isAdmin) {
+                    controlsHtml = `<span class="text-dim text-xs">System Admin</span>`;
+                } else {
+                    const isBlocked = storedUser && storedUser.isBlocked;
+
+                    // 1. Reset Device (Gray)
+                    controlsHtml += `<button class="btn btn-secondary btn-action" onclick="resetDevice('${username}')" ${
+                        storedUser && storedUser.deviceHash ? "" : "disabled"
+                    } type="button">Reset ID</button>`;
+
+                    // 2. Block/Unblock (Warning/Success)
+                    if (isBlocked) {
+                        controlsHtml += `<button class="btn btn-success btn-action" onclick="toggleBlock('${username}', false)" type="button">Unblock</button>`;
+                    } else {
+                        controlsHtml += `<button class="btn btn-warning btn-action" onclick="toggleBlock('${username}', true)" type="button">Block</button>`;
+                    }
+
+                    // 3. Delete Account (Danger/Red)
+                    controlsHtml += `<button class="btn btn-danger btn-action" onclick="confirmDelete('${username}')" type="button">Delete</button>`;
+                }
+
+                const row = userTableBody.insertRow();
+                row.setAttribute("data-username", username);
+                row.innerHTML = `
+                    <td>${usernameDisplay}</td>
+                    <td>${statusBadge}</td>
+                    <td class="text-mono text-xs">${deviceHash}</td>
+                    <td>${controlsHtml}</td>
                 `;
-                tbody.appendChild(tr);
             });
         }
 
-        function updateLogView() {
-            const logs = DB.getJSON("LOGS") || [];
-            const container = document.getElementById('log-container');
-            container.innerHTML = logs.map(l => `<div class="log-entry">${l}</div>`).join('');
+        /* --- ADMIN ACTIONS --- */
+        function resetDevice(username) {
+            let stored = JSON.parse(localStorage.getItem(CONFIG.STORAGE_PREFIX + username)) || {};
+            delete stored.deviceHash;
+            localStorage.setItem(CONFIG.STORAGE_PREFIX + username, JSON.stringify(stored));
+            showToast(`Device binding reset for ${username}.`, "warning");
+            renderUserTable();
+            addLog(`ADMIN: Reset device binding for ${username}.`);
         }
 
-        window.adminBlock = function(user) {
-            if(confirm(`Block ${user}? They will be logged out immediately.`)) {
-                DB.set(`BLOCKED_${user}`, 'true');
-                logAction(`Admin blocked user: ${user}`);
-                renderUserTable();
-                showToast(`${user} blocked.`);
-            }
-        };
+        function toggleBlock(username, blockStatus) {
+            let stored = JSON.parse(localStorage.getItem(CONFIG.STORAGE_PREFIX + username));
+            if (!stored) stored = {}; // Create record if not exists
 
-        window.adminUnblock = function(user) {
-            if(confirm(`Unblock ${user} and RESET device binding?`)) {
-                DB.del(`BLOCKED_${user}`);
-                DB.del(`BIND_${user}`); // Reset device lock on unblock
-                logAction(`Admin unblocked/reset user: ${user}`);
-                renderUserTable();
-                showToast(`${user} restored.`);
+            stored.isBlocked = blockStatus;
+            localStorage.setItem(CONFIG.STORAGE_PREFIX + username, JSON.stringify(stored));
+
+            const msg = blockStatus ? "BLOCKED" : "UNBLOCKED";
+            const type = blockStatus ? "error" : "success";
+
+            showToast(`User ${username} has been ${msg}.`, type);
+            renderUserTable();
+            addLog(`ADMIN: User ${username} was ${msg}.`);
+        }
+
+        function confirmDelete(username) {
+            if (
+                confirm(
+                    `CRITICAL WARNING:\n\nAre you sure you want to PERMANENTLY DELETE user "${username}"?\n\nThis will remove credentials and exam logs. This cannot be undone.`
+                )
+            ) {
+                deleteUser(username);
             }
-        };
+        }
+
+        function deleteUser(username) {
+            if (USERS.hasOwnProperty(username)) {
+                delete USERS[username];
+                localStorage.removeItem(CONFIG.STORAGE_PREFIX + username);
+                showToast(`User account "${username}" DELETED.`, "error");
+                addLog(`ADMIN: Deleted user account "${username}".`);
+                renderUserTable();
+            } else {
+                showToast("Error: User not found.", "error");
+            }
+        }
+
+        function addLog(message) {
+            const logContainer = document.getElementById("log-container");
+            const now = new Date();
+            const timeStr = now.toTimeString().split(" ")[0];
+            const newLog = document.createElement("div");
+            newLog.className = "log-entry";
+            newLog.textContent = `[${timeStr}] ${message}`;
+            logContainer.prepend(newLog);
+            if (logContainer.children.length > 50) logContainer.removeChild(logContainer.lastChild);
+        }
 
         /* ==================================================================================
-           6. QUIZ & BATCH ENGINE (The Core Feature)
+           5. AUTHENTICATION & SESSION
            ================================================================================== */
-        
-        let batchTimerInterval;
-        let score = 0;
-        let answeredCount = 0;
 
-        function initQuizEngine() {
-            score = parseInt(DB.get(`SCORE_${currentUser}`) || 0);
-            answeredCount = parseInt(DB.get(`ANS_${currentUser}`) || 0);
-            updateScoreUI();
+        document.getElementById("btn-admin-access").addEventListener("click", () => {
+            const pass = prompt("Enter Admin Console Password:");
+            if (pass === CONFIG.ADMIN_PASS) {
+                changeView("view-admin");
+                switchAdminTab("users");
+                showToast("ADMIN CONSOLE ACCESS GRANTED", "warning");
+                addLog("ADMIN: Console accessed.");
+            } else if (pass !== null) {
+                showToast("ACCESS DENIED: Invalid Admin Password.", "error");
+                addLog("SECURITY: Invalid Admin access attempt.");
+            }
+        });
 
-            checkBatchStatus();
-            batchTimerInterval = setInterval(updateBatchTimer, 1000);
-        }
+        document.getElementById("btn-admin-exit").addEventListener("click", () => {
+            changeView("view-login");
+            showToast("Admin session terminated.", "muted");
+            addLog("ADMIN: Console exited.");
+        });
 
-        function checkBatchStatus() {
-            const now = Date.now();
-            const start = parseInt(DB.get(`BATCH_START_${currentUser}`) || 0);
-            
-            // Check if batch is expired or non-existent
-            if (!start || (now - start > CONFIG.BATCH_TIME_MS)) {
-                createNewBatch();
+        document.getElementById("btn-login").addEventListener("click", () => {
+            const username = document.getElementById("inp-user").value.toLowerCase().trim();
+            const password = document.getElementById("inp-pass").value.trim();
+
+            if (!username || !password) {
+                showToast("Please enter both username and password.", "error");
+                return;
+            }
+
+            if (USERS[username] && USERS[username].pass === password) {
+                if (USERS[username].role === "admin") {
+                    showToast("Admin login detected. Please use the ADMIN button.", "warning");
+                    return;
+                }
+
+                let storedUser = JSON.parse(localStorage.getItem(CONFIG.STORAGE_PREFIX + username));
+                const currentHash = generateDeviceFingerprint();
+
+                // 1. CHECK IF BLOCKED
+                if (storedUser && storedUser.isBlocked) {
+                    showToast("ACCOUNT BLOCKED: Contact Administrator.", "error");
+                    addLog(`SECURITY: Blocked login attempt by ${username}.`);
+                    return;
+                }
+
+                // 2. DEVICE BINDING LOGIC
+                if (!storedUser) {
+                    // First login
+                    storedUser = { deviceHash: currentHash, score: 0, total: 0, isBlocked: false };
+                    localStorage.setItem(CONFIG.STORAGE_PREFIX + username, JSON.stringify(storedUser));
+                    showToast("SUCCESS: Account bound to device! Proceeding...", "success");
+                    addLog(`SECURITY: New device bound for ${username} (Hash: ${currentHash}).`);
+                } else if (!storedUser.deviceHash) {
+                    // Re-bind after reset
+                    storedUser.deviceHash = currentHash;
+                    localStorage.setItem(CONFIG.STORAGE_PREFIX + username, JSON.stringify(storedUser));
+                    showToast("SUCCESS: Device Re-bound.", "success");
+                } else if (storedUser.deviceHash !== currentHash) {
+                    // Mismatch
+                    showToast("SECURITY VIOLATION: Device mismatch. Access blocked.", "error");
+                    addLog(`SECURITY: Login failed for ${username} (Hash Mismatch).`);
+                    return;
+                }
+
+                // Login Success
+                currentUser = { username, ...USERS[username], ...storedUser };
+                document.getElementById("display-username").textContent = currentUser.username.toUpperCase();
+
+                initQuizSession();
+                changeView("view-quiz");
+                showToast(`Welcome, ${username}! Batch loading...`, "primary");
+                addLog(`USER: ${username} logged in successfully.`);
             } else {
-                renderCurrentBatch();
+                showToast("INVALID CREDENTIALS.", "error");
+                addLog(`SECURITY: Login attempt failed for ${username}.`);
             }
+
+            document.getElementById("inp-pass").value = "";
+        });
+
+        document.getElementById("btn-logout").addEventListener("click", logout);
+
+        function logout() {
+            if (!currentUser) return;
+            showToast(`Session terminated for ${currentUser.username}.`, "muted");
+            addLog(`USER: ${currentUser.username} logged out.`);
+            currentUser = null;
+            clearInterval(quizState.timerInterval);
+            document.getElementById("quiz-list").innerHTML = "";
+            document.getElementById("display-username").textContent = "Guest";
+            document.getElementById("inp-user").value = "";
+            changeView("view-login");
         }
 
-        function createNewBatch() {
-            // Show Loader
-            const loader = document.getElementById('quiz-loader');
-            const list = document.getElementById('quiz-list');
-            list.classList.add('hidden');
-            loader.classList.remove('hidden');
+        /* ==================================================================================
+           6. QUIZ LOGIC (Modified to prevent flicker)
+           ================================================================================== */
 
-            // Logic to pick random unique questions
-            const indices = [];
-            while(indices.length < CONFIG.QUESTIONS_PER_BATCH) {
-                const r = Math.floor(Math.random() * QUESTION_BANK.length);
-                if(!indices.includes(r)) indices.push(r);
+        function initQuizSession() {
+            const storedUser = JSON.parse(localStorage.getItem(CONFIG.STORAGE_PREFIX + currentUser.username));
+            if (storedUser) {
+                quizState.totalCorrect = storedUser.score || 0;
+                quizState.totalQuestions = storedUser.total || 0;
+            } else {
+                quizState.totalCorrect = 0;
+                quizState.totalQuestions = 0;
             }
+            updateScoreDisplay();
+            loadQuestionBatch();
+            startBatchTimer();
+        }
 
-            // Save new batch state
-            DB.set(`BATCH_START_${currentUser}`, Date.now());
-            DB.setJSON(`BATCH_INDICES_${currentUser}`, indices);
-            
-            // Generate Random Batch ID for UI
-            document.getElementById('batch-id').textContent = Math.floor(Math.random() * 9000 + 1000);
+        function loadQuestionBatch() {
+            const quizList = document.getElementById("quiz-list");
+            const loader = document.getElementById("quiz-loader");
+            quizList.classList.add("hidden");
+            loader.classList.remove("hidden");
 
-            // Artificial Delay for "Server Sync" feel
             setTimeout(() => {
-                loader.classList.add('hidden');
-                list.classList.remove('hidden');
-                renderCurrentBatch();
-            }, 800);
+                quizState.currentBatch = [];
+                // shuffle without mutating original
+                const shuffledBank = [...QUESTION_BANK].sort(() => 0.5 - Math.random());
+                quizState.currentBatch = shuffledBank.slice(0, CONFIG.QUESTIONS_PER_BATCH).map((q, index) => ({
+                    ...q,
+                    id: index,
+                    isAnswered: false,
+                    isCorrect: false,
+                    batchId: Math.floor(Date.now() / 1000),
+                }));
+
+                document.getElementById("batch-id").textContent = quizState.currentBatch[0].batchId;
+                renderQuizFull(); // Full render on new batch
+
+                loader.classList.add("hidden");
+                quizList.classList.remove("hidden");
+                showToast("New question batch loaded.", "primary");
+                addLog(`QUIZ: Loaded new batch #${quizState.currentBatch[0].batchId}.`);
+
+                quizState.batchStartTime = Date.now();
+            }, 1000);
         }
 
-        function renderCurrentBatch() {
-            const indices = DB.getJSON(`BATCH_INDICES_${currentUser}`);
-            const container = document.getElementById('quiz-list');
-            container.innerHTML = "";
+        // Full render on new batch load
+        function renderQuizFull() {
+            const quizList = document.getElementById("quiz-list");
+            quizList.innerHTML = "";
 
-            if(!indices) return;
+            quizState.currentBatch.forEach((q, qIndex) => {
+                const card = document.createElement("div");
+                card.className = `quiz-card fade-in ${q.isAnswered ? "answered" : ""}`;
+                card.style.animationDelay = `${qIndex * 0.1}s`;
+                card.id = `quiz-card-${q.id}`;
 
-            indices.forEach((qIndex, i) => {
-                const questionData = QUESTION_BANK[qIndex];
-                const card = document.createElement('div');
-                card.className = "quiz-card fade-in";
-                card.style.animationDelay = `${i * 0.1}s`; // Staggered animation
-                card.id = `qcard-${i}`;
+                card.innerHTML = generateQuestionHtml(q);
+                quizList.appendChild(card);
+            });
+        }
 
-                // Create Options HTML
-                let optionsHtml = "";
-                questionData.opts.forEach((opt, optIdx) => {
-                    optionsHtml += `
-                        <label class="choice-label" id="lbl-${i}-${optIdx}">
-                            <input type="radio" name="question-${i}" value="${optIdx}" onclick="selectOption(${i})">
-                            <span>${opt}</span>
+        // Generate inner HTML for a question card
+        function generateQuestionHtml(q) {
+            let choicesHtml = q.opts
+                .map((option, oIndex) => {
+                    return `
+                        <label class="choice-label" for="q-${q.id}-opt-${oIndex}">
+                            <input 
+                                type="radio" 
+                                id="q-${q.id}-opt-${oIndex}"
+                                name="q-${q.id}" 
+                                value="${oIndex}" 
+                                ${q.isAnswered ? "disabled" : ""}
+                                onchange="handleAnswer(${q.id}, ${oIndex})"
+                                aria-checked="${q.isAnswered && oIndex === q.selectedAnswer ? "true" : "false"}"
+                                ${q.isAnswered && oIndex === q.selectedAnswer ? "checked" : ""}
+                            />
+                            ${String.fromCharCode(65 + oIndex)}. ${option}
                         </label>
                     `;
-                });
+                })
+                .join("");
 
-                card.innerHTML = `
-                    <span class="q-badge">QUESTION ${i + 1}</span>
-                    <div class="q-text">${questionData.q}</div>
-                    <div class="choice-container" id="choices-${i}">
-                        ${optionsHtml}
-                    </div>
-                    <div style="margin-top: 20px;">
-                        <button class="btn btn-primary" id="btn-submit-${i}" onclick="submitAnswer(${i}, ${qIndex})">
-                            SUBMIT ANSWER
-                        </button>
-                    </div>
-                    <div class="feedback-box" id="feed-${i}">
-                        <div style="font-weight: 700; margin-bottom: 8px;" id="res-${i}"></div>
-                        <div style="font-size: 0.9rem; color: var(--text-muted);">${questionData.r}</div>
+            let feedbackHtml = "";
+            if (q.isAnswered) {
+                const sourceHtml = q.source
+                    ? `<br><a href="${q.source}" target="_blank" rel="noopener noreferrer" tabindex="0" aria-label="Source link">${q.source}</a>`
+                    : "";
+                feedbackHtml = `
+                    <div class="feedback-box ${
+                        q.isCorrect ? "correct" : "wrong"
+                    }" style="display: block;" role="region" aria-live="polite" aria-atomic="true">
+                        <p class="font-bold" style="margin-bottom: 8px;">
+                            ${q.isCorrect ? "Correct!" : "Incorrect."} The correct answer is ${String.fromCharCode(65 + q.a)}.
+                        </p>
+                        <p class="text-sm">
+                            ${q.r} ${sourceHtml}
+                        </p>
                     </div>
                 `;
-                container.appendChild(card);
-            });
+            }
+
+            return `
+                <div class="q-badge" aria-label="Question number">Question ${q.id + 1} of ${CONFIG.QUESTIONS_PER_BATCH}</div>
+                <p class="q-text" id="q-text-${q.id}">${q.q}</p>
+                <div class="choice-container" role="radiogroup" aria-labelledby="q-text-${q.id}">
+                    ${choicesHtml}
+                </div>
+                ${feedbackHtml}
+            `;
         }
 
-        // --- ANSWER HANDLING ---
-        window.selectOption = function(localIdx) {
-            // Visual feedback for selection if needed
-        };
+        // On answer, update question card content only (no full re-render)
+        window.handleAnswer = function (questionId, selectedOptionIndex) {
+            const question = quizState.currentBatch.find((q) => q.id === questionId);
 
-        window.submitAnswer = function(localIdx, bankIdx) {
-            const choices = document.getElementsByName(`question-${localIdx}`);
-            let selectedVal = -1;
-            
-            for(const radio of choices) {
-                if(radio.checked) {
-                    selectedVal = parseInt(radio.value);
-                    break;
+            if (question && !question.isAnswered) {
+                question.isAnswered = true;
+                question.selectedAnswer = selectedOptionIndex;
+                question.isCorrect = selectedOptionIndex === question.a;
+
+                quizState.totalQuestions++;
+                if (question.isCorrect) {
+                    quizState.totalCorrect++;
+                    showToast("Answer CORRECT!", "success");
+                } else {
+                    showToast("Answer INCORRECT.", "error");
+                }
+
+                updateScoreDisplay();
+                saveUserProgress();
+
+                // Update question card content only without flicker
+                const card = document.getElementById(`quiz-card-${question.id}`);
+                if (card) {
+                    card.classList.add("answered");
+                    // Replace inner HTML for that question only
+                    card.innerHTML = generateQuestionHtml(question);
                 }
             }
-
-            if(selectedVal === -1) return showToast("Please select an answer first.", "error");
-
-            // Process Answer
-            const qData = QUESTION_BANK[bankIdx];
-            const isCorrect = (selectedVal === qData.a);
-            
-            // UI Updates
-            const btn = document.getElementById(`btn-submit-${localIdx}`);
-            btn.disabled = true;
-            btn.textContent = "LOCKED";
-            
-            document.getElementById(`qcard-${localIdx}`).classList.add('answered');
-
-            const feedback = document.getElementById(`feed-${localIdx}`);
-            const res = document.getElementById(`res-${localIdx}`);
-            feedback.style.display = 'block';
-
-            if(isCorrect) {
-                feedback.className = "feedback-box correct fade-in";
-                res.textContent = "✓ CORRECT ANSWER";
-                res.style.color = "var(--success)";
-                score++;
-            } else {
-                feedback.className = "feedback-box wrong fade-in";
-                res.textContent = `✕ INCORRECT (Correct: ${qData.opts[qData.a]})`;
-                res.style.color = "var(--error)";
-            }
-
-            // Disable Inputs
-            const container = document.getElementById(`choices-${localIdx}`);
-            const labels = container.querySelectorAll('.choice-label');
-            labels.forEach(lbl => {
-                lbl.style.opacity = '0.6';
-                lbl.style.pointerEvents = 'none';
-            });
-
-            // Update Stats
-            answeredCount++;
-            DB.set(`SCORE_${currentUser}`, score);
-            DB.set(`ANS_${currentUser}`, answeredCount);
-            updateScoreUI();
         };
 
-        function updateScoreUI() {
-            document.getElementById('score-display').textContent = score;
-            document.getElementById('total-display').textContent = answeredCount;
+        function saveUserProgress() {
+            if (!currentUser) return;
+            const storedUser = JSON.parse(localStorage.getItem(CONFIG.STORAGE_PREFIX + currentUser.username));
+            if (storedUser) {
+                storedUser.score = quizState.totalCorrect;
+                storedUser.total = quizState.totalQuestions;
+                localStorage.setItem(CONFIG.STORAGE_PREFIX + currentUser.username, JSON.stringify(storedUser));
+            }
         }
 
-        function updateBatchTimer() {
-            const now = Date.now();
-            const start = parseInt(DB.get(`BATCH_START_${currentUser}`) || 0);
-            const diff = (start + CONFIG.BATCH_TIME_MS) - now;
-
-            const timerBadge = document.getElementById('batch-timer');
-
-            if(diff <= 0) {
-                timerBadge.textContent = "REFRESHING...";
-                timerBadge.style.background = "var(--warning)";
-                timerBadge.style.color = "#000";
-                createNewBatch();
-            } else {
-                const m = Math.floor((diff / 1000 / 60) % 60);
-                const s = Math.floor((diff / 1000) % 60);
-                const str = `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
-                
-                timerBadge.textContent = `NEXT SET: ${str}`;
-                timerBadge.style.background = "var(--border-color)";
-                timerBadge.style.color = "var(--text-main)";
-            }
+        function updateScoreDisplay() {
+            document.getElementById("score-display").textContent = quizState.totalCorrect;
+            document.getElementById("total-display").textContent = quizState.totalQuestions;
         }
 
         /* ==================================================================================
-           7. GLOBAL CLOCK
+           7. TIMER & CLOCK
            ================================================================================== */
-        setInterval(() => {
-            const d = new Date();
-            document.getElementById('clock').textContent = d.toLocaleTimeString('en-US', { hour12: false });
-        }, 1000);
 
+        function updateClock() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString("en-US", { hour12: false });
+            document.getElementById("clock").textContent = timeStr;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        function startBatchTimer() {
+            clearInterval(quizState.timerInterval);
+            quizState.batchStartTime = Date.now();
+
+            const timerElement = document.getElementById("batch-timer");
+
+            const updateTimer = () => {
+                const elapsed = Date.now() - quizState.batchStartTime;
+                const remainingMs = CONFIG.BATCH_TIME_MS - elapsed;
+
+                if (remainingMs <= 0) {
+                    loadQuestionBatch();
+                    startBatchTimer();
+                    return;
+                }
+
+                const totalSeconds = Math.floor(remainingMs / 1000);
+                const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, "0");
+                const seconds = String(totalSeconds % 60).padStart(2, "0");
+
+                timerElement.textContent = `NEXT SET: ${minutes}:${seconds}`;
+
+                if (totalSeconds < 60) {
+                    timerElement.style.backgroundColor = "var(--error)";
+                    timerElement.style.color = "white";
+                } else {
+                    timerElement.style.backgroundColor = "var(--border-color)";
+                    timerElement.style.color = "var(--text-main)";
+                }
+            };
+            updateTimer();
+            quizState.timerInterval = setInterval(updateTimer, 1000);
+        }
+
+        // Init
+        generateDeviceFingerprint();
+
+        // Expose functions
+        window.switchAdminTab = switchAdminTab;
+        window.resetDevice = resetDevice;
+        window.confirmDelete = confirmDelete;
+        window.toggleBlock = toggleBlock;
     </script>
 </body>
 </html>
