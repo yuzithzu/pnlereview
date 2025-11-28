@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PNLE PRO | LIVE TRACKER — FULL</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+/* =======================
+   THEME & LAYOUT
+   ======================= */
+:root{
+  --bg-body: #0f0f10;
+  --bg-card: #181818;
+  --text-main: #e6eef3;
+  --text-muted: #a3a3a3;
+  --accent: #00bcd4;
+  --accent-2: #00acc1;
+  --success: #66bb6a;
+  --error: #ef5350;
+  --border: #303033;
+  --glass: rgba(255,255,255,0.02);
+  --radius: 12px;
+  --mono: 'JetBrains Mono', monospace;
+  --bodyfont: 'Inter', sans-serif;
+}
+
+/* Reset + base */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:var(--bodyfont);
+  background:var(--bg-body);
+  color:var(--text-main);
+  padding:24px;
+  padding-bottom:140px; /* leave room for scoreboard */
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* Container */
+.container{
+  width:100%;
+  max-width:860px;
+  margin:0 auto;
+  display:block;
+}
+
+/* Header */
+header{
+  margin-bottom:22px;
+  padding-bottom:14px;
+  border-bottom:1px solid var(--border);
+}
+h1{
+  font-family:var(--mono);
+  margin:0 0 8px 0;
+  color:var(--accent);
+  font-size:1.6rem;
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+h1::before{content:"///"; color:var(--success); letter-spacing:-3px}
+.status-bar{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:center;
+  background:rgba(255,255,255,0.02);
+  padding:10px 14px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  color:var(--text-muted);
+  font-family:var(--mono);
+  font-size:0.9rem;
+}
+
+/* Quiz area */
+#quiz-container{margin-top:18px}
+
+/* Card */
+.card{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:18px;
+  margin-bottom:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.45);
+  overflow:visible;
+}
+.question-meta{
+  display:inline-block;
+  font-family:var(--mono);
+  font-size:0.75rem;
+  color:var(--accent);
+  background:rgba(0,188,212,0.07);
+  padding:4px 8px;
+  border-radius:6px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  margin-bottom:10px;
+}
+.question-text{
+  margin:10px 0 16px 0;
+  font-weight:700;
+  font-size:1.07rem;
+}
+.choices{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+/* Choice item uses label to ensure clicking anywhere selects input */
+.choice-item{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  cursor:pointer;
+  transition:all .18s ease;
+  user-select:none;
+  background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+}
+.choice-item:hover{
+  transform:translateY(-2px);
+  border-color:var(--accent);
+  background:rgba(0,188,212,0.03);
+}
+.choice-item.disabled{
+  opacity:0.65;
+  cursor:default;
+  transform:none;
+}
+.choice-item input[type="radio"]{
+  transform:scale(1.25);
+  accent-color:var(--accent);
+  flex-shrink:0;
+}
+.choice-item span{font-size:0.98rem}
+
+/* Submit button */
+.btn{
+  margin-top:14px;
+  width:100%;
+  padding:13px;
+  border-radius:10px;
+  font-family:var(--mono);
+  font-weight:800;
+  border:none;
+  cursor:pointer;
+  background:var(--accent);
+  color:#000;
+  font-size:1rem;
+  transition:all .15s ease;
+}
+.btn:hover{background:var(--accent-2)}
+.btn:disabled{background:#333;color:#777;cursor:not-allowed;transform:none}
+
+/* Feedback area */
+.feedback{
+  display:none;
+  margin-top:14px;
+  padding:12px;
+  border-radius:8px;
+  background:#1d1d1d;
+  border-left:6px solid transparent;
+}
+.feedback .result-title{
+  font-family:var(--mono);
+  font-weight:800;
+  font-size:1rem;
+}
+.feedback.correct{border-left-color:var(--success)}
+.feedback.wrong{border-left-color:var(--error)}
+.result-title.correct{color:var(--success)}
+.result-title.wrong{color:var(--error)}
+.rationale{color:var(--text-muted);font-size:0.92rem;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.03)}
+
+/* Study link */
+.study-link{
+  display:inline-block;
+  margin-top:10px;
+  font-family:var(--mono);
+  font-size:0.82rem;
+  padding:6px 10px;
+  border-radius:6px;
+  border:1px solid var(--accent);
+  color:var(--accent);
+  text-decoration:none;
+}
+.study-link:hover{background:var(--accent); color:#000}
+
+/* Footer scoreboard fixed */
+.scoreboard{
+  position:fixed;
+  left:0;
+  bottom:0;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  pointer-events:auto;
+  z-index:9999;
+}
+.scoreboard .inner{
+  width:100%;
+  max-width:960px;
+  padding:14px 22px;
+  background:rgba(10,10,10,0.95);
+  border-top:3px solid var(--accent);
+  box-shadow:0 -8px 24px rgba(0,0,0,0.6);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  border-radius:12px 12px 0 0;
+}
+.score-text{font-family:var(--mono);font-weight:700}
+.score-val{color:var(--success);font-weight:900}
+.timer-text{font-family:var(--mono);color:var(--text-muted);font-size:0.92rem}
+
+/* small screens adjustments */
+@media (max-width:700px){
+  :root{--radius:10px}
+  body{padding:16px;padding-bottom:160px}
+  .container{max-width:100%}
+  h1{font-size:1.2rem}
+  .status-bar{flex-direction:column;align-items:flex-start;gap:6px}
+  .question-text{font-size:1.03rem}
+  .choice-item{padding:10px}
+  .scoreboard .inner{padding:12px 14px;flex-direction:column;align-items:flex-start;gap:6px}
+  .timer-text{text-align:left}
+}
+
+/* ensure no overlap with scoreboard */
+@media (min-width:0px){
+  /* increase bottom padding of body when scoreboard present */
+  body.has-scoreboard{padding-bottom:220px}
+}
+
+/* accessibility: focus outlines */
+.choice-item:focus-within{outline:2px solid rgba(0,188,212,0.12);outline-offset:3px;border-color:var(--accent)}
+.btn:focus{outline:2px solid rgba(0,188,212,0.14);outline-offset:3px;}
+</style>
+</head>
+<body class="has-scoreboard">
+<div class="container">
+  <header>
+    <h1>PNLE_SYSTEM // v.3.0 — FULL</h1>
+    <div class="status-bar">
+      <div id="date-display">...</div>
+      <div id="time-display">...</div>
+    </div>
+  </header>
+
+  <!-- Quiz container -->
+  <main id="quiz-container" aria-live="polite">
+    <!-- Cards will be injected here -->
+  </main>
+
+  <div style="text-align:center; padding:18px; color:var(--text-muted); font-size:0.86rem">
+    &gt; END OF CURRENT BATCH
+  </div>
+</div>
+
+<!-- Scoreboard (fixed) -->
+<div class="scoreboard" role="status" aria-label="scoreboard">
+  <div class="inner">
+    <div class="score-text">SCORE: <span id="current-score" class="score-val">0</span> / <span id="total-answered">0</span></div>
+    <div class="timer-text" id="refresh-timer">SYNCING...</div>
+  </div>
+</div>
+
+<script>
+/* ============================
+   FULL JS — robust & fixed
+   ============================ */
+
+/* ----------------------------
+   Authentication + multi-user limit
+   ---------------------------- */
+const MAX_USERS = 10;
+const USER_LIST_KEY = 'pnle_active_users_v4';
+const LOGIN_STATE_KEY = 'pnle_logged_in_v4';
+const CURRENT_USER_KEY = 'pnle_current_user_v4';
+
+/* Hard-coded users (as requested) */
+const USERS = {
+  "user1":"pass1","user2":"pass2","user3":"pass3","user4":"pass4","user5":"pass5",
+  "user6":"pass6","user7":"pass7","user8":"pass8","user9":"pass9","user10":"pass10"
+};
+
+/* Helper to safely parse JSON in localStorage */
+function safeGet(key){
+  try{
+    return JSON.parse(localStorage.getItem(key));
+  }catch(e){ return null; }
+}
+
+/* Authenticate user with prompts (keeps behavior you had).
+   Returns username string on success, null on failure.
+   This function also registers the user in localStorage and ensures
+   login state cleared on tab close.
+*/
+function authenticateUserPrompt(){
+  let active = safeGet(USER_LIST_KEY) || [];
+  let states = safeGet(LOGIN_STATE_KEY) || {};
+
+  // ask username
+  let username = prompt("Enter your username:");
+  if(!username) { alert("Username is required!"); return null; }
+  username = username.trim();
+
+  if(!(username in USERS)){
+    alert("Username not recognized!");
+    return null;
+  }
+
+  let password = prompt("Enter your password:");
+  if(password === null){ alert("Password required"); return null; }
+
+  if(password !== USERS[username]){
+    alert("Incorrect password!");
+    return null;
+  }
+
+  // if already flagged logged in (and not in this tab), block
+  if(states[username]){
+    alert("This user is already logged in on another device or tab.");
+    return null;
+  }
+
+  // add to active list if not exist and enforce max
+  if(!active.includes(username)){
+    if(active.length >= MAX_USERS){
+      alert("Maximum user limit reached (10 users). Try again later.");
+      return null;
+    }
+    active.push(username);
+    localStorage.setItem(USER_LIST_KEY, JSON.stringify(active));
+  }
+
+  // mark logged in
+  states[username] = true;
+  localStorage.setItem(LOGIN_STATE_KEY, JSON.stringify(states));
+  localStorage.setItem(CURRENT_USER_KEY, username);
+
+  // ensure cleanup on unload
+  // we attach a single handler per session (use localStorage+event)
+  window.addEventListener('pagehide', function(){
+    // pagehide is more reliable than beforeunload for various browsers
+    let s = {};
+    try{ s = JSON.parse(localStorage.getItem(LOGIN_STATE_KEY)) || {}; }catch(e){}
+    s[username] = false;
+    localStorage.setItem(LOGIN_STATE_KEY, JSON.stringify(s));
+    // remove from active list (optional — keep if you want persistent active list)
+    // we will remove user from active list on explicit sign out; frequently clearing may be undesirable.
+  });
+
+  return username;
+}
+
+/* ----------------------------
+   QUESTION BANK (full 15 items)
+   ---------------------------- */
+const QUESTION_BANK = [
+  {
+    id:1,
+    q:"A client with COPD is admitted with acute respiratory distress. Which finding would cause the nurse the most concern?",
+    choices:["Respiratory rate of 28","O2 Saturation of 89%","PaCO2 of 55 mmHg","Confusion and lethargy"],
+    ans:"Confusion and lethargy",
+    rat:"RATIONALE: Confusion and lethargy indicate CO2 narcosis (CO2 affecting the brain). This is a medical emergency impending respiratory failure.",
+    topic:"COPD Carbon Dioxide Narcosis Nursing"
+  },
+  {
+    id:2,
+    q:"A nurse is caring for a patient taking Lithium. Which symptom suggests early toxicity?",
+    choices:["Fine hand tremors","Coarse hand tremors","Polyuria","Mild thirst"],
+    ans:"Coarse hand tremors",
+    rat:"RATIONALE: Fine tremors are expected side effects. COARSE tremors, along with ataxia and confusion, are signs of toxicity (>1.5 mEq/L).",
+    topic:"Lithium toxicity signs nursing"
+  },
+  {
+    id:3,
+    q:"In performing Leopold's Maneuver, what is the first step?",
+    choices:["Palpate the fetal back","Locate fetal head in pelvic inlet","Palpate the fundus","Check engagement"],
+    ans:"Palpate the fundus",
+    rat:"RATIONALE: The first maneuver (Fundal Grip) determines which fetal part (head or buttocks) occupies the fundus.",
+    topic:"Leopold's Maneuver steps nursing"
+  },
+  {
+    id:4,
+    q:"A child with Tetralogy of Fallot squats. Why?",
+    choices:["Promotes rest","Decreases venous return","Increases systemic vascular resistance","Increases leg blood flow"],
+    ans:"Increases systemic vascular resistance",
+    rat:"RATIONALE: Squatting increases SVR, which forces more blood into the pulmonary artery for oxygenation, relieving the 'Tet spell'.",
+    topic:"Tetralogy of Fallot squatting mechanism"
+  },
+  {
+    id:5,
+    q:"Priority for Potassium level of 6.5 mEq/L?",
+    choices:["Encourage banana","Prepare dialysis","Administer Kayexalate","Hook to cardiac monitor"],
+    ans:"Hook to cardiac monitor",
+    rat:"RATIONALE: Hyperkalemia causes fatal dysrhythmias. Cardiac monitoring is the immediate safety priority before treatment.",
+    topic:"Hyperkalemia nursing management priority"
+  },
+  {
+    id:6,
+    q:"Post-thyroidectomy tingling around the mouth. Priority assessment?",
+    choices:["Check bleeding","Assess Chvostek's sign","Check BP","Assess Trousseau's sign"],
+    ans:"Assess Chvostek's sign",
+    rat:"RATIONALE: Tingling indicates Hypocalcemia. Chvostek's sign (facial twitching) is the quickest bedside assessment.",
+    topic:"Post thyroidectomy hypocalcemia signs"
+  },
+  {
+    id:7,
+    q:"Rifampicin side effect to emphasize?",
+    choices:["Orange-red urine","Peripheral neuropathy","Ototoxicity","Vision changes"],
+    ans:"Orange-red urine",
+    rat:"RATIONALE: Rifampicin causes orange-red discoloration of body fluids. It is harmless but can cause anxiety if not taught.",
+    topic:"Rifampicin side effects nursing teaching"
+  },
+  {
+    id:8,
+    q:"Vaccine stored in freezer (-15 to -25°C)?",
+    choices:["Hepatitis B","OPV (Oral Polio)","Pentavalent","Tetanus Toxoid"],
+    ans:"OPV (Oral Polio)",
+    rat:"RATIONALE: OPV is very heat sensitive and must be kept frozen to maintain potency.",
+    topic:"Cold chain management vaccines DOH"
+  },
+  {
+    id:9,
+    q:"Mannitol vial has crystals. Action?",
+    choices:["Discard","Shake vigorously","Warm the bottle","Use filter needle"],
+    ans:"Warm the bottle",
+    rat:"RATIONALE: Mannitol crystallizes in cold. Warm the bottle to dissolve crystals before administration.",
+    topic:"Mannitol administration nursing crystals"
+  },
+  {
+    id:10,
+    q:"Nurse sees wrong leg surgery but stays silent. Liability?",
+    choices:["Malpractice","Negligence","Battery","Assault"],
+    ans:"Malpractice",
+    rat:"RATIONALE: Malpractice is professional negligence. The nurse failed the duty to protect the patient from harm.",
+    topic:"Nursing malpractice vs negligence examples"
+  },
+  {
+    id:11,
+    q:"Patient says 'I am a spy for the CIA'. This is:",
+    choices:["Hallucination","Delusion of Grandeur","Delusion of Persecution","Illusion"],
+    ans:"Delusion of Grandeur",
+    rat:"RATIONALE: Delusion of grandeur involves a false belief of inflated worth, power, knowledge, or identity.",
+    topic:"Types of Delusions psychiatric nursing"
+  },
+  {
+    id:12,
+    q:"Normal Fetal Heart Rate (FHR) range?",
+    choices:["80-120","100-160","110-160","120-180"],
+    ans:"110-160",
+    rat:"RATIONALE: The standard normal baseline FHR is 110-160 bpm.",
+    topic:"Normal fetal heart rate range nursing"
+  },
+  {
+    id:13,
+    q:"Best position for enema administration?",
+    choices:["Supine","Right Sim's","Left Sim's","Fowler's"],
+    ans:"Left Sim's",
+    rat:"RATIONALE: Left Sim's follows the natural curve of the sigmoid colon, allowing gravity to flow solution into the bowel.",
+    topic:"Enema administration position rationale"
+  },
+  {
+    id:14,
+    q:"Antidote for Paracetamol overdose?",
+    choices:["Naloxone","Acetylcysteine","Atropine","Protamine"],
+    ans:"Acetylcysteine",
+    rat:"RATIONALE: N-acetylcysteine (Mucomyst) prevents liver damage from Acetaminophen toxicity.",
+    topic:"Antidotes for common drug overdoses nursing"
+  },
+  {
+    id:15,
+    q:"Moon Face and Buffalo Hump suggest:",
+    choices:["Addison's","Cushing's Syndrome","Grave's","Hypothyroidism"],
+    ans:"Cushing's Syndrome",
+    rat:"RATIONALE: These are cardinal signs of excess cortisol levels found in Cushing's Syndrome.",
+    topic:"Cushing's syndrome signs and symptoms nursing"
+  }
+];
+
+/* ----------------------------
+   Timing, storage keys, settings
+   ---------------------------- */
+const UPDATE_INTERVAL_MS = 10 * 60 * 1000; // 10 minutes per your original
+const QUESTIONS_PER_BATCH = 5;
+
+const TIMER_KEY = 'pnle_timer_v4';
+const INDICES_KEY = 'pnle_indices_v4';
+const SCORE_KEY = 'pnle_score_v4';
+const ANSWERED_KEY = 'pnle_answered_v4';
+
+/* runtime vars */
+let currentScore = 0;
+let answeredCount = 0;
+let currentUser = null;
+
+/* ----------------------------
+   Utility functions
+   ---------------------------- */
+function save(key, value){
+  localStorage.setItem(key, JSON.stringify(value));
+}
+function load(key, fallback){
+  const raw = localStorage.getItem(key);
+  if(raw === null) return fallback;
+  try{ return JSON.parse(raw); } catch(e){ return fallback; }
+}
+function clamp(val,min,max){ return Math.max(min, Math.min(max, val)); }
+
+/* ----------------------------
+   Batch selection (random unique indices)
+   ---------------------------- */
+function getQuestionSet(){
+  const now = Date.now();
+  const storedTime = Number(localStorage.getItem(TIMER_KEY));
+  const storedIndices = load(INDICES_KEY, null);
+
+  // if no batch stored or expired -> make new
+  if(!storedTime || !storedIndices || (now - storedTime > UPDATE_INTERVAL_MS)){
+    // pick unique indices
+    const indices = [];
+    while(indices.length < QUESTIONS_PER_BATCH){
+      const r = Math.floor(Math.random() * QUESTION_BANK.length);
+      if(!indices.includes(r)) indices.push(r);
+    }
+    localStorage.setItem(TIMER_KEY, String(now));
+    localStorage.setItem(INDICES_KEY, JSON.stringify(indices));
+    // reset scores for the new batch (optional: preserve across reloads — but you had reset before)
+    localStorage.setItem(SCORE_KEY, "0");
+    localStorage.setItem(ANSWERED_KEY, "0");
+    currentScore = 0;
+    answeredCount = 0;
+    updateScoreDisplay();
+    return indices;
+  } else {
+    // reuse stored
+    currentScore = Number(localStorage.getItem(SCORE_KEY) || 0);
+    answeredCount = Number(localStorage.getItem(ANSWERED_KEY) || 0);
+    updateScoreDisplay();
+    try{
+      return JSON.parse(localStorage.getItem(INDICES_KEY));
+    }catch(e){
+      // fallback to new
+      return getQuestionSet();
+    }
+  }
+}
+
+/* ----------------------------
+   Render quiz (safe, no inline escaping)
+   ---------------------------- */
+function renderQuiz(){
+  const indices = getQuestionSet();
+  const container = document.getElementById('quiz-container');
+  container.innerHTML = '';
+
+  indices.forEach((qIndex, idx)=> {
+    const d = QUESTION_BANK[qIndex];
+    const qKey = `q${idx}`;
+
+    // build choices markup (labels wrap input for clicking)
+    const choicesHtml = d.choices.map((c,ci) => {
+      // escape html (very simple)
+      const safeText = c.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      return `
+        <label class="choice-item" data-q="${qKey}">
+          <input type="radio" name="${qKey}" value="${safeText}" />
+          <span>${safeText}</span>
+        </label>
+      `;
+    }).join("\n");
+
+    // attach card
+    const card = document.createElement('article');
+    card.className = 'card';
+    card.id = `card-${qKey}`;
+    card.innerHTML = `
+      <div class="question-meta">Q${idx+1}</div>
+      <div class="question-text">${d.q}</div>
+      <div class="choices" id="choices-${qKey}">
+        ${choicesHtml}
+      </div>
+      <button class="btn" id="btn-${qKey}" data-q="${qKey}" aria-controls="feedback-${qKey}">SUBMIT ANSWER</button>
+      <div class="feedback" id="feedback-${qKey}" aria-live="polite" aria-atomic="true">
+        <div class="result-title" id="title-${qKey}"></div>
+        <div class="rationale">${d.rat}<br><a class="study-link" href="https://www.google.com/search?q=${encodeURIComponent(d.topic)}" target="_blank" rel="noopener noreferrer">🔗 READ MORE ABOUT THIS TOPIC</a></div>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+
+  // After insertion attach event listeners (delegated)
+  attachChoiceHandlers();
+}
+
+/* ----------------------------
+   Choice & submit handling
+   ---------------------------- */
+function attachChoiceHandlers(){
+  // make sure existing listeners are not duplicated
+  // we'll use event delegation on container
+  const container = document.getElementById('quiz-container');
+
+  // remove old listener if any (defensive)
+  container.replaceWith(container.cloneNode(true));
+  const newContainer = document.getElementById('quiz-container');
+
+  // Click on label toggles radio already due to wrapping, but we'll add keyboard support
+  newContainer.addEventListener('keydown', function(e){
+    if(e.key === ' ' || e.key === 'Enter'){
+      // if focus is inside a label, trigger the input
+      const lab = e.target.closest('.choice-item');
+      if(lab){
+        const input = lab.querySelector('input[type="radio"]');
+        if(input && !input.disabled){
+          input.checked = true;
+          // prevent page scroll on space
+          e.preventDefault();
+        }
+      }
+    }
+  });
+
+  // handle submit button clicks
+  newContainer.addEventListener('click', function(e){
+    const btn = e.target.closest('.btn');
+    if(btn){
+      const qKey = btn.getAttribute('data-q');
+      if(qKey) {
+        // find question data by mapping qKey -> index in rendered indices
+        // we need to find corresponding QUESTION_BANK entry
+        handleSubmit(qKey, btn);
+      }
+    }
+  });
+
+  // When user clicks a label we also add a visual "selected" state for better UX
+  newContainer.addEventListener('click', function(e){
+    const lab = e.target.closest('.choice-item');
+    if(lab){
+      const q = lab.getAttribute('data-q');
+      if(!q) return;
+      // remove .selected from others
+      const siblings = document.querySelectorAll(`#choices-${q} .choice-item`);
+      siblings.forEach(s => s.classList.remove('selected'));
+      lab.classList.add('selected');
+    }
+  });
+}
+
+/* Map rendered qKey (q0..qN) to actual question object from the stored indices */
+function getQuestionDataForQKey(qKey){
+  // qKey format: q{index} where index is 0..(QUESTIONS_PER_BATCH-1)
+  const renderedIndex = Number(qKey.replace(/^q/,''));
+  const indices = load(INDICES_KEY, []);
+  const qBankIndex = indices[renderedIndex];
+  if(typeof qBankIndex === 'undefined') return null;
+  return QUESTION_BANK[qBankIndex];
+}
+
+/* handle submit logic robustly */
+function handleSubmit(qKey, btnElement){
+  const choicesDiv = document.getElementById(`choices-${qKey}`);
+  if(!choicesDiv) return;
+
+  const radios = choicesDiv.querySelectorAll('input[type="radio"]');
+  const selected = choicesDiv.querySelector('input[type="radio"]:checked');
+
+  if(!selected){
+    alert("Please select an answer.");
+    return;
+  }
+
+  // disable radios to prevent double actions
+  radios.forEach(r => r.disabled = true);
+  btnElement.disabled = true;
+  btnElement.innerText = "LOCKED";
+
+  const feedback = document.getElementById(`feedback-${qKey}`);
+  const title = document.getElementById(`title-${qKey}`);
+
+  if(!feedback || !title) return;
+
+  // ensure feedback visible
+  feedback.style.display = 'block';
+  feedback.classList.remove('correct','wrong');
+  title.classList.remove('correct','wrong');
+
+  answeredCount++;
+  const qData = getQuestionDataForQKey(qKey);
+  if(!qData){
+    console.warn("Question data not found for", qKey);
+    title.textContent = "Error: question data missing";
+    feedback.classList.add('wrong');
+    title.classList.add('wrong');
+    localStorage.setItem(ANSWERED_KEY, String(answeredCount));
+    updateScoreDisplay();
+    return;
+  }
+
+  const correct = qData.ans;
+  // compare values strictly (they are strings)
+  if(selected.value === correct){
+    currentScore++;
+    feedback.classList.add('correct');
+    title.classList.add('correct');
+    title.textContent = "✓ CORRECT";
+  } else {
+    feedback.classList.add('wrong');
+    title.classList.add('wrong');
+    title.textContent = `✕ WRONG — Correct: ${correct}`;
+  }
+
+  // save
+  localStorage.setItem(SCORE_KEY, String(currentScore));
+  localStorage.setItem(ANSWERED_KEY, String(answeredCount));
+  updateScoreDisplay();
+
+  // visually mark the choice items as disabled
+  const labels = choicesDiv.querySelectorAll('.choice-item');
+  labels.forEach(l => l.classList.add('disabled'));
+}
+
+/* ----------------------------
+   Score display + clock
+   ---------------------------- */
+function updateScoreDisplay(){
+  const cs = Number(localStorage.getItem(SCORE_KEY) || currentScore || 0);
+  const ac = Number(localStorage.getItem(ANSWERED_KEY) || answeredCount || 0);
+  document.getElementById('current-score').innerText = cs;
+  document.getElementById('total-answered').innerText = ac;
+}
+
+/* update clock + refresh timer */
+function updateClock(){
+  const now = new Date();
+  const dateDisp = document.getElementById('date-display');
+  const timeDisp = document.getElementById('time-display');
+  dateDisp.textContent = now.toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric' });
+  timeDisp.textContent = now.toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit', second:'2-digit' });
+
+  const storedTime = Number(localStorage.getItem(TIMER_KEY) || 0);
+  const timerElem = document.getElementById('refresh-timer');
+  if(!storedTime){
+    timerElem.textContent = "NO BATCH LOADED";
+    return;
+  }
+  const remaining = (storedTime + UPDATE_INTERVAL_MS) - Date.now();
+  if(remaining <= 0){
+    // show action to refresh
+    timerElem.innerHTML = `<a href="#" id="refresh-newset" style="color:var(--accent); text-decoration:none; font-weight:700;">↺ REFRESH FOR NEW SET</a>`;
+    // attach click to force reload
+    const link = document.getElementById('refresh-newset');
+    if(link){
+      link.addEventListener('click', function(e){
+        e.preventDefault();
+        // clear timer to force new set and reload page
+        localStorage.removeItem(TIMER_KEY);
+        localStorage.removeItem(INDICES_KEY);
+        location.reload();
+      });
+    }
+  } else {
+    const mm = Math.floor((remaining/1000/60)%60);
+    const ss = Math.floor((remaining/1000)%60);
+    timerElem.textContent = `NEXT SET IN ${mm}m ${ss}s`;
+  }
+}
+
+/* ----------------------------
+   Startup: Authenticate then render
+   ---------------------------- */
+function startApp(){
+  // Authenticate first
+  const user = authenticateUserPrompt();
+  if(!user){
+    // show access denied
+    const container = document.getElementById('quiz-container');
+    container.innerHTML = `<div class="card"><div style="color:var(--error); font-weight:700; text-align:center; padding:28px;">ACCESS DENIED or MAX USERS REACHED or USER ALREADY LOGGED IN.</div></div>`;
+    return;
+  }
+  currentUser = user;
+
+  // render and start clock
+  renderQuiz();
+  updateClock();
+  setInterval(updateClock, 1000);
+}
+
+/* ----------------------------
+   Keep localStorage in sync across tabs (optional improvements)
+   ---------------------------- */
+window.addEventListener('storage', function(e){
+  // if someone else changed score/answered/timer/indices — reflect
+  if([SCORE_KEY, ANSWERED_KEY, TIMER_KEY, INDICES_KEY].includes(e.key)){
+    // re-render scoreboard values
+    updateScoreDisplay();
+    // if timer/indices changed, optionally refresh UI
+    // we avoid re-rendering cards to prevent overwriting user's selections in this tab
+  }
+});
+
+/* ----------------------------
+   Start
+   ---------------------------- */
+startApp();
+
+/* ----------------------------
+   End of JS
+   ---------------------------- */
+</script>
+
+</body>
+</html>
